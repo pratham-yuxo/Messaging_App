@@ -35,14 +35,14 @@ const ChatList = (props) => {
             {
                 users.map(user=>{
                    
-                  return  user.sub !== Details.sub && <>
+                  return  user.email !== Details.email && <div  key={user.email}>
                  <ChatListItem user={user}/>
                  <Divider2/>
-                 </>
+                 </div>
 
                 })
             }
-        </Box>
+        </Box> 
     )
 }
 

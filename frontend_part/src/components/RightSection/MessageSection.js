@@ -1,10 +1,17 @@
-import React,{useEffect,useState,useRef} from 'react'
+import React,{useEffect,useState,useRef,useContext} from 'react'
 import { Box, styled } from '@mui/material'
 import image from './logoo.jpg'
 import { getMessages } from '../../allApis/forAdding'
 import Message from './message'
-const Box1=styled(Box)`
+import AccountContext from '../../context/accountContext'
+
+
+
+const MessageSection = (props) => {
+const {darkMode} = useContext(AccountContext);
+  const Box1=styled(Box)`
 background-image: url(${image});
+filter:${darkMode?"invert(1)":" "}
 // background-color:red;
 `
 const Component=styled(Box)`
@@ -12,10 +19,9 @@ const Component=styled(Box)`
 height: calc(100vh - 121.13px);
 overflow-y:scroll;
 // to make it scroll in y direction
+filter:${darkMode?"invert(1)":" "}
 `
 
-
-const MessageSection = (props) => {
 
   // whenever this component is loaded use effect will fetch all the messages corresponding to the person selected
   useEffect(() => {
@@ -29,16 +35,17 @@ const MessageSection = (props) => {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({transition:"smooth"})
 
-  }, [props.messageToDisplay])
+  }, [props.messageToDisplay,props.value])
   return (
 <Box1>
   {/* <img src={image} alt="" /> */}
 <Component >
 {
   props.messageToDisplay&& props.messageToDisplay.map(message=>
-    <Box ref={scrollRef}>
-
-   <Message key={message._id} message={message}></Message>
+    <Box key={message._id} ref={scrollRef}>
+      {console.log(message.text)}
+      
+   <Message  message={message}></Message>
    </Box>)
   
 }

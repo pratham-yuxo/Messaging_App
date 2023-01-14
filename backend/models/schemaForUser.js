@@ -47,7 +47,13 @@ const newSchema = new Schema({
     },
     jti: {
         type: String
+    },
+    byGoogle:{
+        type: Boolean,
     }
+    // editname:{
+    //     type:String,
+    // }
 });
 //user is the name of collection
 const User = mongoose.model('user', newSchema);

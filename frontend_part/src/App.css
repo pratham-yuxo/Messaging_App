@@ -25,12 +25,13 @@ html,body{
 .wrapper{
   overflow-x: hidden;
   max-width: 390px;
-  background: #fff;
+  /* background: #fff; */
   padding: 30px;
   border-radius: 5px;
   box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
   padding-bottom: 0px;
   scrollbar-width: none;
+  padding-top: 0px;
   
 }
 .wrapper .title-text{
@@ -52,8 +53,9 @@ html,body{
   overflow: hidden;
   margin: 30px 0 10px 0;
   justify-content: space-between;
-  border: 1px solid lightgrey;
+  /* border: 1px solid lightgrey; */
   border-radius: 5px;
+  margin-top: 0px;
 }
 .slide-controls .slide{
   height: 100%;
@@ -77,14 +79,25 @@ html,body{
   left: 0;
   z-index: 0;
   border-radius: 5px;
-  background: -webkit-linear-gradient(left, #a445b2, #fa4299);
+  /* background: -webkit-linear-gradient(left, #a445b2, #fa4299); */
+  /* background-color: #2961ff; */
+  /* background: -webkit-linear-gradient(right, #fc00ff, #00dbde ); */
+  background: -webkit-linear-gradient(right,  #00dbde, #2d3aff);
+
+
   transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
 }
 input[type="radio"]{
   display: none;
 }
+/* input{
+  background-color: black;
+} */
 #signup:checked ~ .slider-tab{
   left: 50%;
+}
+.signup-link{
+  color: #7ff1e1;
 }
 #signup:checked ~ label.signup{
   color: #fff;
@@ -149,7 +162,8 @@ form .field input:focus::placeholder{
 }
 .form-inner form .pass-link a,
 .form-inner form .signup-link a{
-  color: #fa4299;
+  /* color: #fa4299; */
+  color: white;
   text-decoration: none;
 }
 .form-inner form .pass-link a:hover,
@@ -168,7 +182,10 @@ form .btn .btn-layer{
   width: 300%;
   position: absolute;
   left: -100%;
-  background: -webkit-linear-gradient(right, #a445b2, #fa4299, #a445b2, #fa4299);
+  /* background: -webkit-linear-gradient(right, #a445b2, #fa4299, #a445b2, #fa4299); */
+  /* background: -webkit-linear-gradient(right, #2cdcbd, #3e99c7, #29e2bf, #3e63cf); */
+  background-color: #2961ff;
+
   border-radius: 5px;
   transition: all 0.4s ease;;
 }
@@ -199,12 +216,15 @@ form .btn input[type="submit"]{
 }
 .googlebox span{
   padding: 0 10px;
-  background-color: #fff;
+  color: white;
+  /* background-color: #fff; */
 }
 /* to hide that nasty vertical scrollbar */
-::-webkit-scrollbar {
+#new::-webkit-scrollbar {
   /* background-color: white; */
+width: 0px !important;
 }
+
 /* for navbar */
 .navbar{
   display: flex;
@@ -227,9 +247,7 @@ width: 40px;
 .menuu:hover{
 cursor: pointer;
 }
-imagediv{
-width: 100%;
-}
+
 /* imi::before{
   content: "";
   position: absolute;
@@ -267,7 +285,19 @@ width: 100%;
     left: -24px;
     width: 20px;
     height: 20px;
-    background: linear-gradient(225deg, #6ed76e 0%,#6ed76e 50%,transparent 50%, transparent);
+    background: linear-gradient(225deg, white 0%,#fff 50%,transparent 50%, transparent);
+
+  }
+  .recd::before{
+    content: "";
+    position: absolute;
+    top: -6px;
+    /* right: 34px; */
+    left: -24px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(225deg, #243156 0%,#243156 50%,transparent 50%, transparent);
+
   }
 
   /* for scrollbar */
@@ -283,3 +313,96 @@ width: 100%;
   ::-webkit-scrollbar-thumb{
     background: rgba(0,0,0,0.2);
   }
+
+
+
+
+
+/* #new::after{
+  content: "";
+  position: absolute;
+  background: linear-gradient(to bottom,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.1) 15%,transparent 50%,transparent 85%,rgba(0,0,0,0.3) 0%);
+  top: 5px;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+  border-radius: 5px;
+}
+
+ */
+
+
+
+
+
+
+  /*[ Button ]*/
+.container-login100-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wrap-login100-form-btn {
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 1;
+  border-radius: 25px;
+  overflow: hidden;
+  margin: 0 auto;
+
+  box-shadow: 0 5px 30px 0px rgba(3, 216, 222, 0.2);
+  -moz-box-shadow: 0 5px 30px 0px rgba(3, 216, 222, 0.2);
+  -webkit-box-shadow: 0 5px 30px 0px rgba(3, 216, 222, 0.2);
+  -o-box-shadow: 0 5px 30px 0px rgba(3, 216, 222, 0.2);
+  -ms-box-shadow: 0 5px 30px 0px rgba(3, 216, 222, 0.2);
+}
+
+.login100-form-bgbtn {
+  position: absolute;
+  z-index: 0;
+  width: 300%;
+  height: 100%;
+  background: #a64bf4;
+  /* background: -webkit-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
+  background: -o-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
+  background: -moz-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
+  background: linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff); */
+  /* background: -webkit-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff); */
+  background: -webkit-linear-gradient(right, #2d3aff, #00dbde, #2d3aff, #00dbde);
+  top: 0;
+  left: -100%;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.login100-form-btn {
+  font-family: Poppins-Medium;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+}
+
+.wrap-login100-form-btn:hover .login100-form-bgbtn {
+  left: 0;
+}

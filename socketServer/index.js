@@ -11,14 +11,14 @@ let users=[];//array of active user
 
 // will add the active user to array
 const addUser=(userData,socketId)=>{
-    // if user.sub is not equal to userdata.sub then it will add it to the array
-    !users.some(user => user.sub === userData.sub) && users.push({ ...userData, socketId });
+    // if user.email is not equal to userdata.email then it will add it to the array
+    !users.some(user => user.email === userData.email) && users.push({ ...userData, socketId });
 // ... spreading it and then adding
 }
 
 // we have the user id ,now getting the socket id
 const getUser=(userId)=>{
-    return users.find(user=>user.sub===userId);
+    return users.find(user=>user.email===userId);
 }
 
 

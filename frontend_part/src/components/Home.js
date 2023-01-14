@@ -1,54 +1,96 @@
-import React,{useContext,useEffect} from 'react'
+import React, { useContext, useEffect } from 'react'
 import ChatBox from "./RightSection/ChatBox"
 import LeftSideBar from "./LeftBar/chatListSection/LeftSideBar"
 import EmptyChat from './RightSection/EmptyChat'
 import AccountContext from '../context/accountContext'
-
+import AddDialog from './AddFriendSection/AddDialog'
+import { useNavigate } from 'react-router-dom'
+import { fetchDetails } from '../allApis/forAdding'
 
 // "maxWidth":"46%",
 // "minWidth":"344px",
 // "width":"436px",
 // "height":"100vh",
 // "background":"#fff"
-const chat={
-"width":"70%",
-"minWidth":"501px",
-"height":"100%",
-"borderLeft":"1px solid rgba(0,0,0,0.2) !important"
-}
-const Home = () => {
-  const {chatOfPersonOnWhichUHaveClicked,loader,socket} = useContext(AccountContext);
-  useEffect(() => {
-    socket.current.connect();
 
-  }, [])
+const Home = () => {
+  let history = useNavigate();
+  const { darkMode, dialogbox, setDetails, Details, chatOfPersonOnWhichUHaveClicked, loader, socket } = useContext(AccountContext);
+  const chat = {
+    "width": "70%",
+    "minWidth": "501px",
+    "height": "100%",
+    "borderLeft": `1px solid ${darkMode ? "#000000" : "rgba(0,0,0,0.2)"} !important`,
+    flex: '1'
+  }
+  useEffect(() => {
+    // console.log("Details")
+    const fun = async () => {
+      if (localStorage.getItem('token')) {
+        let details;
+if (!Details) {
   
-  const sideBar={
-    "maxWidth":"45%",
-    "minWidth":"270px",
-    "width":"30%",
-    "height":"100vh",
-    "background":"#fff",
-    pointerEvents: `${loader?'none':'auto'}`
+   details = await fetchDetails();
+  console.log(details)
+  setDetails(details);
+  if (!details) {
+    history('/login');
     
   }
-  const upperDiv={
-    "display":"flex",
-    opacity: `${loader?'.9':'1'}`,
+}
+        // else {
+        //   history('/');
+        // }
+      }
+      else{
+        console.log("here")
+        history('/login');
+      }
+
+    }
+    fun();
+
+
+
+  }, [])
+
+  useEffect(() => {
+    socket.current?.connect();
+
+  }, [])
+
+  const sideBar = {
+    "maxWidth": "45%",
+    "minWidth": "336px",
+    "width": "400px",
+    "height": "100vh",
+    "background": `${darkMode ? '#111b21' : '#fff'}`,
+    pointerEvents: `${loader ? 'none' : 'auto'}`
+
+  }
+  const upperDiv = {
+    "display": "flex",
+    opacity: `${loader ? '.9' : '1'}`,
   }
   return (
-    <div style={upperDiv}>
-      <div style={sideBar}>
-        <LeftSideBar />
+    <div >
 
-      </div>
 
-      <div style={chat}>
+      {dialogbox && <div style={{ position: "relative" }}><AddDialog /></div>}
+      {Details && <div style={upperDiv}>
 
-        {Object.keys(chatOfPersonOnWhichUHaveClicked).length? <ChatBox />: <EmptyChat/>}
-      </div>
+        <div style={sideBar}>
+          <LeftSideBar />
 
-{/* Object.keys() --> will give you all the keys of your object ,if nothing is present then it will return a zero otherwise list of keys */}
+        </div>
+
+        <div style={chat}>
+          {console.log("home")}
+          {Object.keys(chatOfPersonOnWhichUHaveClicked).length ? <ChatBox /> : <EmptyChat />}
+        </div>
+
+        {/* Object.keys() --> will give you all the keys of your object ,if nothing is present then it will return a zero otherwise list of keys */}
+      </div>}
     </div>
   )
 }

@@ -1,13 +1,14 @@
 import express from "express";
-import { addNewUser,getUsers } from "../controller/userController.js";
+import { addNewUser,getUsers,getDetails } from "../controller/userController.js";
 import { makeConversation,getConversation } from "../controller/Conversation.js";
 import { sendMessage,getMessages } from "../controller/messageFunctions.js";
 import { uploadFile,getImage } from "../controller/imageController.js";
 import upload from "../middleware/upload.js";
+import authenticate from '../middleware/authenticate.js'
 const router=express.Router();
 //all these methods are written in routes folder and fuction are imported from controller folder
 router.post('/addNewUser',addNewUser)
-
+router.get('/fetchDetails',authenticate,getDetails);
 //for showing data
 router.get('/getUsers',getUsers)
 
@@ -20,4 +21,4 @@ router.post('/file/upload', upload.single("file"),uploadFile);// calling the mid
 //  we cant directly store our files to mogodb, we have to parse formdata because it is in binary form , multer will handle this
 // for getting files
 router.get('/file/:filename',getImage);// grid fs stream for collecting files from mongodb which is present in mongodb
-export default router;
+export default router; 

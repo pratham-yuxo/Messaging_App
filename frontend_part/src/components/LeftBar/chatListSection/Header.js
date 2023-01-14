@@ -1,16 +1,67 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState,useRef,useEffect } from 'react'
 import accountContext from "../../../context/accountContext"
 import SearchIcon from '@mui/icons-material/Search';
-import TextField from '@mui/material/TextField';
+import {TextField,Box,styled} from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import HeaderMenu from './HeaderMenu';
 import LeftDrawer from '../sidebarSection/LeftDrawer';
-
 const Header = (props) => {
     const [isOpen, setisOpen] = useState(false)
-        const { Details } = useContext(accountContext)
+    const { Details,darkMode } = useContext(accountContext)
+    const Box1=styled(Box)`
+    display: flex;
+    width: 100%;
+    /* flex-direction: column; */
+    padding: 10px 16px;
+    background-color: ${darkMode?"#202c33":"#ededed"};
+    padding-right: 8px;
+    `
+    const CssTextField = styled(TextField)`
+   ${ darkMode &&  {
+        '& .MuiFormLabel-root':{
+            color:'#aebac1'
+        },
+        '& label.Mui-focused': {
+          color: 'aqua',
+        },
+        '& .MuiInput-underline:after': {
+          borderBottomColor: 'aqua',
+        },
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: '#aebac1',
+          },
+          '&:hover fieldset': {
+            borderColor: 'white',
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: 'aqua',
+          },
+        }
+      }}`;
+const [val, setval] = useState('');
+const [timeoutId, setTimeoutId] = useState(null);
+
+const handleChange = (e) => {
+  const newVal = e.target.value;
+  requestAnimationFrame(() => {
+      setval(newVal);
+      props.setsearchChatlist(newVal);
+  });
+
+}
+let autofocus=false;
+
+
+// const handleChange = (e) => {
+//   const newVal = e.target.value;
+//   setval(newVal);
+//   requestAnimationFrame(() => {
+//       props.setsearchChatlist(newVal);
+//   });
+// }
     return (
-        <div className='navbar'>
+        <Box1 >
             <div className="image">
                 <img src={Details.picture} alt="dp" onClick={()=>{setisOpen(true)}} />
             </div>
@@ -24,16 +75,25 @@ const Header = (props) => {
 
                     }}>
                     <div>
-                <TextField onChange={(e)=> props.setsearchChatlist(e.target.value)} size='small'   id="outlined-basic" label="Search chats" variant="outlined"
+                     
+                <CssTextField
+                // ref={textFieldRef}
+                value={val}
+                // defaultValue={props.searchChatlist}
+                autoFocus={val==''?false:true}
+                 onChange={handleChange} size='small'   id="outlined-basic" label="Search chats" variant="outlined"
                 InputProps={{
                     endAdornment:(
-                        <InputAdornment position='end'>
-                         <SearchIcon />
+                        <InputAdornment  position='end'>
+                         <SearchIcon style={{color:"#aebac1"}}/>
                         </InputAdornment>
                     )
                 }}
                 sx={{
-                    '& .MuiInputBase-root':{    borderRadius: '8px'}
+                    '& .MuiInputBase-root':{    
+                        borderRadius: '8px',
+                        
+                }
                 }}/>
                     </div>
                     <div>
@@ -47,7 +107,7 @@ const Header = (props) => {
                 </div>
             </div>
             <LeftDrawer isOpen={isOpen} setisOpen={setisOpen}/>
-        </div>
+        </Box1>
     )
 }
 

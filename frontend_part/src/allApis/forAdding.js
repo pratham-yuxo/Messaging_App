@@ -5,11 +5,39 @@ const url='http://localhost:5000'
 //for adding a user
 export const createUser =async (data)=>{
     try {
-        await axios.post(`${url}/api/addNewUser`,data);
-    } catch (error) {
+      const response= await axios.post(`${url}/api/addNewUser`,data);
+      const json=  response.data;
+
+      if (json.success){ 
+        // Save the auth token and redirect
+        localStorage.setItem('token', json.authtoken); 
+        // history("/");
+  console.log("stored ",json.authtoken);}
+    }catch (error) {
      console.log("error in create user in src/allapi/for adding",error)   
     }
 }
+// fetching details of user by jwt
+export const fetchDetails = async () => {
+  // API Call 
+  try {
+    const response = await axios.get(`${url}/api/fetchDetails`, {
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem('token')
+      }
+    });
+    const json = response.data;
+    // console.log(json);
+    return json;
+    
+  } catch (error) {
+    console.log("error fetchdetails",error)
+    
+  }
+}
+
+
 //for showing users
 export const getUsers =async ()=>{
     try {
@@ -18,7 +46,7 @@ export const getUsers =async ()=>{
     return response.data;
     } catch (error) {
      console.log("error in create user in src/allapi/getUsers",error)   
-    }
+    } 
 }
 export const setConversation =async (data)=>{
     try {

@@ -4,6 +4,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Box } from '@mui/system';
 import styled from '@emotion/styled';
 import Profile from './Profile';
+import {Animated} from "react-animated-css";
+
 //isopen and setisOpen is in props
 const drawerCSS={
     width: "30.5%",
@@ -16,14 +18,23 @@ height: 100%;
 `
 const LeftDrawer = (props) => {
   return (
-    <div >
-         <Drawer
+    
+    <Drawer
             open={props.isOpen}
+
+            anchor="left"
             onClose={()=> props.setisOpen(false)}
             PaperProps={{sx:drawerCSS}}
+            sx={{
+              '& .MuiDrawer-paper': {
+                  minWidth: "336px",
+                  width: "35%"
+              }
+            }}
           >
+    <div className='side' >
           
-          <div style={{
+          <div  style={{
             "paddingRight":"20px",
             "paddingLeft":"23px",
             "backgroundImage": "linear-gradient(#a00abb,#6621a4)",  
@@ -32,7 +43,7 @@ const LeftDrawer = (props) => {
             "gap":"25px",
             "paddingTop":"45px",
             "alignItems":"center",
-            "minWidth":"30%"
+            "minWidth":"336px"
           }}>
             <ArrowBackIcon onClick={()=> props.setisOpen(false)}
             sx={{color:"white"}}
@@ -42,8 +53,9 @@ const LeftDrawer = (props) => {
 <Profilebar>
     <Profile isOpen={props.isOpen}/>
 </Profilebar>
-          </Drawer>
     </div>
+          </Drawer>
+    
   )
 }
 

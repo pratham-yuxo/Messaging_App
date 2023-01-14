@@ -1,11 +1,9 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { Box, styled } from '@mui/material'
 import image from './logoo.jpg'
+import AccountContext from '../../context/accountContext'
 
-const Box1=styled(Box)`
-background-image: url(${image});
 
-`
 const Box2=styled(Box)`
 display:flex;
 align-items:center;
@@ -22,6 +20,11 @@ background: #ededed;
     box-shadow: 1px 3.3px rgb(0 0 0 / 36%);
 `
 const EmptyChat = () => {
+    const { darkMode } = useContext(AccountContext)
+    const Box1=styled(Box)`
+    background-image: url(${image});
+    ${darkMode && "filter:invert(1);"}
+    `
   return (
    <Box1>
 <Box2>

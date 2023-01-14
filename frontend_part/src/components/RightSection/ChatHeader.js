@@ -6,18 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountContext from '../../context/accountContext';
 
 //       ------------styling----------------
-const Box1 = styled(Box)`
-border-left: 1px solid #d1d7db;
-padding: 10px 16px;
-position: relative;
-    z-index: 1000;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 59px;
-    background-color:#ededed;
-`
+
 const Box3 = styled(Box)`
 flex-grow:1;
 `
@@ -49,15 +38,26 @@ padding: 8px 8px;
 margin-left: 10px;
 color: #54656f;
 `
-const Typography1=styled(Typography)`
-// margin-left:12px !important;
-`
 
 
 const ChatHeader = (props) => {
-    const {activeUsers} = useContext(AccountContext)
-
-
+    const {activeUsers,darkMode} = useContext(AccountContext)
+    const Typography1=styled(Typography)`
+   color: ${darkMode?"white":"black"}
+    `
+    
+    const Box1 = styled(Box)`
+    border-left: 1px solid ${darkMode?"#000000":" #d1d7db"} ;
+    padding: 10px 16px;
+    position: relative;
+        z-index: 1000;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 59px;
+        background-color:${darkMode?'#202c33':"#ededed"};
+    `
     return (
         <Box1>
 
@@ -68,7 +68,7 @@ const ChatHeader = (props) => {
             {/* conact name */}
             <Box3>
                 <Typography1>{props.person.name}</Typography1>
-                <Typography1 style={{"fontSize":"12px","color":"rgb(0,0,0,0.6"}}>{activeUsers.find(user=>user.sub===props.person.sub)?'online':"offline"}</Typography1>
+                <Typography1 style={{"fontSize":"12px","color":`${darkMode?"#8696a0":"rgb(0,0,0,0.6)"}`}}>{activeUsers.find(user=>user.email===props.person.email)?'online':"offline"}</Typography1>
             </Box3>
 
             {/* icons */}  

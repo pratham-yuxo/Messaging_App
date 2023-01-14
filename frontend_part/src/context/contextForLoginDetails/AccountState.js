@@ -9,9 +9,11 @@ const AccountState = (props) => {
     const [chatOfPersonOnWhichUHaveClicked, setchatOfPersonOnWhichUHaveClicked] = useState([])
     const [loaderf, setloaderf] = useState(false)
     const [msgflag, setmsgflag] = useState(false)//for displaying new msgs
-
+// for handling of dialog box
+const [dialogbox, setDialogbox] = useState(false);
 // to store the list of active users
 const [activeUsers, setactiveUsers] = useState([])
+const [darkMode, setdarkMode] = useState(false);
   const socket =useRef();
 useEffect(() => {
   
@@ -29,7 +31,11 @@ socket.current=io('ws://localhost:8000')//address of backend where server of soc
     loaderf,
     setloaderf,
     msgflag,
-    setmsgflag
+    setmsgflag,
+    setDialogbox,
+    dialogbox,
+    darkMode,
+    setdarkMode
     }}>
         {props.children}
     </AccountContext.Provider>

@@ -50,7 +50,7 @@ const Profile = (props) => {
                 animationInDuration={500}
                 animationOut='flipInY'
                 isVisible={props.isOpen}>
-                {console.log("first",props.isOpen)}
+                
             <img style={{
                 "borderRadius":"100px",
                 "height":"190px",

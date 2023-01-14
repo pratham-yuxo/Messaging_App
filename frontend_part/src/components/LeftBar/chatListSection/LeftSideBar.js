@@ -10,7 +10,8 @@ const LeftSideBar = () => {
       // "display":"flex",
       // "flexDirection":"column"
     }}>
-        <Header setsearchChatlist={setsearchChatlist}/>
+      {console.log(searchChatlist)}
+        <Header searchChatlist={searchChatlist} setsearchChatlist={setsearchChatlist}/>
         <ChatList searchChatlist={searchChatlist}/>
         </div>
   )
