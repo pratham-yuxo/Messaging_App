@@ -5,6 +5,7 @@ import { setConversation,getConversation } from '../../../allApis/forAdding'
 import {Animated} from "react-animated-css";
 import ImageIcon from '@mui/icons-material/Image';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import new2 from '../../../images/new4.png';
 const Box2= styled(Box)`
 padding : 0 15px 0 13px;
 display : flex;
@@ -85,7 +86,7 @@ white-space: nowrap;
           "height":"49px",
           "width":"49px",
           "borderRadius":"50%",
-        }} src={props.user.picture} alt="" />
+        }} src={props.user.picture || new2} alt="" />
       </Box2>
       <Box3>
         

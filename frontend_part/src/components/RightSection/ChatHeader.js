@@ -4,7 +4,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SearchIcon from '@mui/icons-material/Search';
 // import defaultI from '../../images/new2.png'
 import AccountContext from '../../context/accountContext';
-
+import noUser from '../../images/new4.png'
 //       ------------styling----------------
 
 const Box3 = styled(Box)`
@@ -62,7 +62,7 @@ const ChatHeader = (props) => {
         <Box1>
 
             <Box2>
-                <img src={props.person.picture} alt="dp" />
+                <img src={props.person.picture || noUser} alt="dp" />
             </Box2>
 
             {/* conact name */}

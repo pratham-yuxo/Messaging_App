@@ -1,6 +1,5 @@
 import axios from "axios"
 
-
 const url='http://localhost:5000'
 //for adding a user
 export const createUser =async (data)=>{
@@ -16,6 +15,20 @@ export const createUser =async (data)=>{
     }catch (error) {
      console.log("error in create user in src/allapi/for adding",error)   
     }
+}
+export const login=async(data)=>{
+  try {
+    const response= await axios.post(`${url}/api/login`,data);
+    const json=  response.data;
+
+    if (json.success){ 
+      // Save the auth token and redirect
+      localStorage.setItem('token', json.authtoken); 
+      // history("/");
+console.log("stored ",json.authtoken);}
+  } catch (error) {
+    console.log("error in login", error);
+  }
 }
 // fetching details of user by jwt
 export const fetchDetails = async () => {

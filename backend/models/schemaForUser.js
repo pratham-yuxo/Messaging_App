@@ -10,7 +10,7 @@ const newSchema = new Schema({
     },
     sub: {
         type: String,
-        required: true
+
     },
     rbf: {
         type: Number,

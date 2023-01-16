@@ -11,6 +11,7 @@ const authenticate=(req,res,next)=>{
         //verifying token which come from header
     const data =jwt.verify(token,JWT_SECRET);
     req.user=data.user;
+    console.log(data.user)
     next();
         
     } catch (error) {

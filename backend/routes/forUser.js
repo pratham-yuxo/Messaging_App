@@ -1,5 +1,5 @@
 import express from "express";
-import { addNewUser,getUsers,getDetails } from "../controller/userController.js";
+import { addNewUser,getUsers,getDetails,login } from "../controller/userController.js";
 import { makeConversation,getConversation } from "../controller/Conversation.js";
 import { sendMessage,getMessages } from "../controller/messageFunctions.js";
 import { uploadFile,getImage } from "../controller/imageController.js";
@@ -7,8 +7,9 @@ import upload from "../middleware/upload.js";
 import authenticate from '../middleware/authenticate.js'
 const router=express.Router();
 //all these methods are written in routes folder and fuction are imported from controller folder
-router.post('/addNewUser',addNewUser)
+router.post('/addNewUser',addNewUser);
 router.get('/fetchDetails',authenticate,getDetails);
+router.post('/login',login);
 //for showing data
 router.get('/getUsers',getUsers)
 

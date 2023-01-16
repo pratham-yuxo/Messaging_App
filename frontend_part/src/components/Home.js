@@ -14,6 +14,7 @@ import { fetchDetails } from '../allApis/forAdding'
 // "background":"#fff"
 
 const Home = () => {
+
   let history = useNavigate();
   const { darkMode, dialogbox, setDetails, Details, chatOfPersonOnWhichUHaveClicked, loader, socket } = useContext(AccountContext);
   const chat = {
@@ -25,24 +26,24 @@ const Home = () => {
   }
   useEffect(() => {
     // console.log("Details")
+
     const fun = async () => {
       if (localStorage.getItem('token')) {
+        console.log("token found")
+        console.log(localStorage.getItem('token'))
         let details;
-if (!Details) {
-  
-   details = await fetchDetails();
-  console.log(details)
-  setDetails(details);
-  if (!details) {
-    history('/login');
-    
-  }
-}
-        // else {
-        //   history('/');
-        // }
+        if (!Details) {
+
+          details = await fetchDetails();
+          console.log("details by fetching",details)
+          setDetails(details);
+          if (!details) {
+            history('/login');
+
+          }
+        }
       }
-      else{
+      else {
         console.log("here")
         history('/login');
       }
