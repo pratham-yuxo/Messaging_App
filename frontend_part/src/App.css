@@ -239,6 +239,7 @@ width: 0px !important;
   flex-grow: 1;
   height: 40px;
   padding-right: 16px;
+  cursor: pointer;
 }
 .image img{
 border-radius: 100px;
@@ -421,3 +422,31 @@ input::-webkit-input-placeholder {
 .wrap-login100-form-btn:hover .login100-form-bgbtn {
   left: 0;
 }
+
+/*   for add friend */
+.rotate {
+  animation: rotate .5s ease-in-out;
+}
+
+@keyframes rotate {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(45deg);}
+}
+@keyframes rot {
+  from {transform: rotate(45deg);}
+  to {transform: rotate(0deg);}
+}
+.rot{
+  animation: rot .5s ease-in-out;
+}
+.rotate{
+  transform: rotate(45deg);}
+
+
+  .wave{
+    height: 40px;
+    width:180px;
+padding: 0 14px;
+margin-left:auto;
+  }
+

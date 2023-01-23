@@ -6,6 +6,8 @@ import SendIcon from '@mui/icons-material/Send';
 import { uploadFile } from '../../allApis/forAdding';
 import Loader from './Loader';
 import AccountContext from '../../context/accountContext';
+import Audio from './Audio';
+import {Animated} from 'react-animated-css'
 // css
 
 const Box2 = styled(Box)`
@@ -16,15 +18,6 @@ color:#54656f;
 
 `
 
-const Box4 = styled(Box)`
-padding: 5px 10px;
-width: 37px;
-color:#54656f;
-& > path{
-  font-size: 100%;
-  transform : scale(1.1);
-}
-`
 const Input = styled(InputBase)`
 width: 100%;
 color:black;
@@ -42,6 +35,21 @@ const style = { 'cursor': "pointer", "fontSize": "26px" };
 
 const ChatFooter = (props) => {
   const {darkMode, loaderf, setloaderf } = useContext(AccountContext);
+  const [showAudio, setshowAudio] = useState(false);
+  const [audioUrl, setAudioUrl] = useState(null);
+  const [file, setfile] = useState(false)
+
+
+  const Box4 = styled(Box)`
+  padding: 5px 10px;
+  width: ${!showAudio && "37px"};
+  color:#54656f;
+  margin-left:${showAudio && "auto"};
+  & > path{
+    font-size: 100%;
+    transform : scale(1.1);
+  }
+  `
   const Box3 = styled(Box)`
 display:flex;
 flex:1;
@@ -78,7 +86,7 @@ order:3;
         const data = new FormData();
         data.append("name", props.file.name);
         data.append("file", props.file);
-
+        console.log(props.file)
         setloaderf(true);
         let response = await uploadFile(data);
         response && setloaderf(false);
@@ -102,11 +110,24 @@ order:3;
 
   const onchange = (e) => {
     props.setFile(e.target.files[0])// file is present in a event ,on 0th value of files array
-    // console.log(e)
+    console.log(e)
     props.setvalue(e.target.files[0].name)
   }
+  const handleChange = (e) => {
+    const newVal = e.target.value;
+    requestAnimationFrame(() => {
+        
+        props.setvalue(newVal);
+    });
+  }
   return (
+    <div>
+
+        
     <Box1 style={{ pointerEvents: `${loaderf ? 'none' : 'auto'}` }}>
+    { !showAudio &&
+     <>
+
       {loaderf && <div style={{
         position: "absolute",
         top: "-50vh",
@@ -114,6 +135,7 @@ order:3;
 
       }}><Loader /></div>}
       {/* for clip attack icon */}
+ 
       <Box2>
         <label htmlFor='fileInput'>
 
@@ -128,30 +150,41 @@ order:3;
       {/* texting space */}
       <Box3>
         <Input
-        autoFocus='autoFocus'
+        autoFocus={true}
           placeholder='Type a message to sent'
-          onChange={(e) => props.setvalue(e.target.value)}
+          onChange={handleChange}
           onKeyPress={(e) => props.sendChat(e)}
           value={props.value}
           sx={{color:`${darkMode && "white"}`}}
         />
         {/* onkeypress will be called when any key is press */}
       </Box3>
+      </>
+}
 
       {/* mic icon */}
       <Box4>
 
         {
-          props.value === '' ? <KeyboardVoiceIcon style={style} /> : <SendIcon
+          props.value === '' ?
+           <Audio setimage={props.setimage} setvalue={props.setvalue} file={file} setfile={props.setFile} audioUrl={audioUrl} setAudioUrl={setAudioUrl} showAudio={showAudio} setshowAudio={setshowAudio} style={style}/>  
+          : <SendIcon
             onClick={
               () => { let e = { which: 13 }; props.sendChat(e) }
             }
             style={style}
           />
         }
+
       </Box4>
+     
+ 
+
 
     </Box1>
+
+
+    </div>
   )
 }
 

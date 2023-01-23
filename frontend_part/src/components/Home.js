@@ -21,6 +21,7 @@ const Home = () => {
     "width": "70%",
     "minWidth": "501px",
     "height": "100%",
+    position:"relative",
     "borderLeft": `1px solid ${darkMode ? "#000000" : "rgba(0,0,0,0.2)"} !important`,
     flex: '1'
   }
@@ -66,7 +67,8 @@ const Home = () => {
     "width": "400px",
     "height": "100vh",
     "background": `${darkMode ? '#111b21' : '#fff'}`,
-    pointerEvents: `${loader ? 'none' : 'auto'}`
+    pointerEvents: `${loader ? 'none' : 'auto'}`,
+    position:"relative"
 
   }
   const upperDiv = {

@@ -105,3 +105,15 @@ export const uploadFile = async (data)=>{
      console.log("error in frontend upload file",error)   
     }
 }
+export const uploadAudio = async (data)=>{
+    try {
+  let response=await axios.post(`${url}/api/file/uploadAudio`,data,{
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  })    
+  return response;
+    } catch (error) {
+     console.log("error in frontend upload file",error)   
+    }
+}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Drawer from '@mui/material/Drawer';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Box } from '@mui/system';
@@ -17,13 +17,26 @@ background: #ededed;
 height: 100%;
 `
 const LeftDrawer = (props) => {
+  const [isOpen, setisOpen] = useState(false)
+  useEffect(() => {
+    setisOpen(props.isOpen)
+    console.log(props.isOpen)
+  
+  }, [props.isOpen])
+  const handleclose=()=>{
+    setisOpen(false);
+    setTimeout(() => {
+      
+      props.setisOpen(false)
+    }, 100);
+  }
   return (
-    
+    <div>
     <Drawer
-            open={props.isOpen}
+            open={isOpen}
 
             anchor="left"
-            onClose={()=> props.setisOpen(false)}
+            onClose={handleclose}
             PaperProps={{sx:drawerCSS}}
             sx={{
               '& .MuiDrawer-paper': {
@@ -32,6 +45,7 @@ const LeftDrawer = (props) => {
               }
             }}
           >
+            {console.log("first")}
     <div className='side' >
           
           <div  style={{
@@ -55,7 +69,7 @@ const LeftDrawer = (props) => {
 </Profilebar>
     </div>
           </Drawer>
-    
+          </div>
   )
 }
 

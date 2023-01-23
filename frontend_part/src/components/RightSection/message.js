@@ -84,6 +84,7 @@ const Message = (props) => {
 
   // img message denotes that either the message is image or any other type of format but not a text
   let isImg = /\.png|\.jpg|\.webp|\.jpeg/.test(props.message.text);
+  let isPdf=props.message.text.includes('.pdf') ;
   const ImgMsg = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [imageError, setImageError] = useState(false);
@@ -97,7 +98,8 @@ const handleLoad=()=>{
 
         {
           // if it is a pdf
-          props.message.text.includes('.pdf') ?
+          
+          isPdf ?
             <Box className={`${isSender ? "msg" :`${darkMode?"recd":"rec"}`}`} style={{ position: "relative" }}>
               <img src={pdf} alt="file" />
               <Typography style={{
@@ -108,7 +110,7 @@ const handleLoad=()=>{
               </Typography>
             </Box>
             :
-            // if it is a image
+            // if it is a image or any other file
 
             <div className={`${isSender ? "msg" :`${darkMode?"recd":"rec"}`}`} style={{ position: "relative" }}>
               {isImg && isLoading && <div style={{
@@ -117,6 +119,7 @@ const handleLoad=()=>{
                 right: '70px',
 
               }}><Loader /></div>}
+              
               <img src={isImg ? src : file} alt={props.message.text} style={{
                 objectFit: "cover",
                 height: `${isImg ? '180px' : "130"}`,

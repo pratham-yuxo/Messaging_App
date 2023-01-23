@@ -1,4 +1,4 @@
-import React, { useContext, useState,useRef,useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import accountContext from "../../../context/accountContext"
 import SearchIcon from '@mui/icons-material/Search';
 import {TextField,Box,styled} from '@mui/material';
@@ -40,7 +40,6 @@ const Header = (props) => {
         }
       }}`;
 const [val, setval] = useState('');
-const [timeoutId, setTimeoutId] = useState(null);
 
 const handleChange = (e) => {
   const newVal = e.target.value;
@@ -50,20 +49,17 @@ const handleChange = (e) => {
   });
 
 }
-let autofocus=false;
+const handleOpen=()=>{
+  setisOpen(true);
+  console.log(isOpen)
+}
 
 
-// const handleChange = (e) => {
-//   const newVal = e.target.value;
-//   setval(newVal);
-//   requestAnimationFrame(() => {
-//       props.setsearchChatlist(newVal);
-//   });
-// }
+
     return (
         <Box1 >
             <div className="image">
-                <img src={Details.picture} alt="dp" onClick={()=>{setisOpen(true)}} />
+                <img src={Details.picture} alt="dp" onClick={handleOpen} />
             </div>
             <div style={{"display":"flex"}}>
                 <div className="search" style={{
@@ -80,7 +76,7 @@ let autofocus=false;
                 // ref={textFieldRef}
                 value={val}
                 // defaultValue={props.searchChatlist}
-                autoFocus={val==''?false:true}
+                autoFocus={val===''?false:true}
                  onChange={handleChange} size='small'   id="outlined-basic" label="Search chats" variant="outlined"
                 InputProps={{
                     endAdornment:(
