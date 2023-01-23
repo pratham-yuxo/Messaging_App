@@ -1,10 +1,12 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import { Box, styled, Typography } from '@mui/material'
 import AccountContext from '../../context/accountContext'
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import pdf from '../../images/pdf.png'
 import file from '../../images/file.png'
 import Loader from './Loader';
+import WaveSurfer from 'wavesurfer.js';
+
 const downloadFile = (e, imageUrl) => {
   e.preventDefault();
   try {
@@ -50,12 +52,12 @@ const myStyle = {
 
 
 const Message = (props) => {
-  const { Details,darkMode } = useContext(AccountContext)
+  const { Details, darkMode } = useContext(AccountContext)
   let isSender = Details.email === props.message.senderId;
 
 
   const Box1 = styled(Box)`
-  background:${isSender ?darkMode? "linear-gradient( 180deg, #9611b9 0%, rgb(10 61 155) 51%, #1a7eed 92% ) no-repeat center":"#7a84ff;":darkMode?"#243156":"white"};
+  background:${isSender ? darkMode ? "linear-gradient( 180deg, #9611b9 0%, rgb(10 61 155) 51%, #1a7eed 92% ) no-repeat center" : "#7a84ff;" : darkMode ? "#243156" : "white"};
   // #dbdbdb
   max-width: 60%;
   margin-${isSender ? "left" : "right"}:auto;
@@ -69,14 +71,14 @@ const Message = (props) => {
   // background: linear-gradient( 180deg, rgba(139, 47, 184, 1) 0%, rgba(103, 88, 205, 1) 51%, rgba(89, 116, 219, 1) 92% ) no-repeat center;
   background-attachment: ${isSender && "fixed"};
   // margin-bottom:2px;
-  color:${darkMode?'#e9edef':'black'};
+  color:${darkMode ? '#e9edef' : 'black'};
   `
 
 
   const TextMsg = () => {
     return (<>
       {
-        <span className={`${isSender ? "msg" :`${darkMode?"recd":"rec"}`}`} style={myStyle}>{props.message.text}</span>
+        <span className={`${isSender ? "msg" : `${darkMode ? "recd" : "rec"}`}`} style={myStyle}>{props.message.text}</span>
       }
 
     </>)
@@ -84,23 +86,57 @@ const Message = (props) => {
 
   // img message denotes that either the message is image or any other type of format but not a text
   let isImg = /\.png|\.jpg|\.webp|\.jpeg/.test(props.message.text);
-  let isPdf=props.message.text.includes('.pdf') ;
+  let isPdf = props.message.text.includes('.pdf');
+  let isAudio = props.message.text.includes('.mp3');
   const ImgMsg = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [imageError, setImageError] = useState(false);
-
+    const [audioUrl, setAudioUrl] = useState('');
+    const [playing, setPlaying] = useState(false);
+    const [hasMounted, setHasMounted] = useState(false);
+    const wavesurfer = useRef(null);
+    const containerId = `waveform-${Math.random().toString(36).substring(7)}`
+    // const containerId="a"+props.message._id
+    useEffect(() => {
+      if (!wavesurfer.current&&isAudio) {
+        wavesurfer.current = WaveSurfer.create({
+          container: document.querySelector(`#${containerId}`),
+          waveColor: '#D9DCFF',
+          progressColor: '#4353FF',
+          cursorColor: '#4353FF',
+          barWidth: 3,
+          barRadius: 3,
+          cursorWidth: 1,
+          height: 200,
+          barGap: 3
+        });
+        wavesurfer.current.load(props.message.text);
+      }
+    }, [isAudio]);
+    
+    const handlePlay = () => {
+      wavesurfer.current.play();
+      setPlaying(true);
+    }
+    
+    const handlePause = () => {
+      wavesurfer.current.pause();
+      setPlaying(false);
+    }
+    
     let src = props.message.text;
-const handleLoad=()=>{
-  setIsLoading(false);
-}
+    const handleLoad = () => {
+      setIsLoading(false);
+    }
+
     return (<>
       <Box>
 
+        
         {
           // if it is a pdf
-          
           isPdf ?
-            <Box className={`${isSender ? "msg" :`${darkMode?"recd":"rec"}`}`} style={{ position: "relative" }}>
+            <Box className={`${isSender ? "msg" : `${darkMode ? "recd" : "rec"}`}`} style={{ position: "relative" }}>
               <img src={pdf} alt="file" />
               <Typography style={{
                 width: "101px",
@@ -110,28 +146,46 @@ const handleLoad=()=>{
               </Typography>
             </Box>
             :
-            // if it is a image or any other file
+            isAudio ?
+              // setAudioUrl(true);
+                
+              <div className={`${isSender ? "msg" : `${darkMode ? "recd" : "rec"}`}`} style={{ position: "relative" }}>
+               
+                {/* <audio src={props.message.text} controls/> */}
+                <Typography style={{
+                  width: "101px",
+                  fontSize: "13px"
+                }}>
+                  <button onClick={playing ? handlePause : handlePlay}>
+                    {playing ? 'Pause' : 'Play'}
+                  </button>
+                  <div id={containerId}></div>
 
-            <div className={`${isSender ? "msg" :`${darkMode?"recd":"rec"}`}`} style={{ position: "relative" }}>
-              {isImg && isLoading && <div style={{
-                position: "absolute",
-                top: "70px",
-                right: '70px',
+                  {props.message.text.split('/').pop()}
+                </Typography>
+              </div>
+              // if it is a image or any other file
+              :
+              <div className={`${isSender ? "msg" : `${darkMode ? "recd" : "rec"}`}`} style={{ position: "relative" }}>
+                {isImg && isLoading && <div style={{
+                  position: "absolute",
+                  top: "70px",
+                  right: '70px',
 
-              }}><Loader /></div>}
-              
-              <img src={isImg ? src : file} alt={props.message.text} style={{
-                objectFit: "cover",
-                height: `${isImg ? '180px' : "130"}`,
-                width: `${isImg ? '203px' : ""}`
-              }} onLoad={handleLoad} />
-              <Typography style={{
-                width: `${isImg ? '200px' : "101px"}`,
-                fontSize: "13px"
-              }}>
-                {props.message.text.split('/').pop()}
-              </Typography>
-            </div>
+                }}><Loader /></div>}
+
+                <img src={isImg ? src : file} alt={props.message.text} style={{
+                  objectFit: "cover",
+                  height: `${isImg ? '180px' : "130"}`,
+                  width: `${isImg ? '203px' : ""}`
+                }} onLoad={handleLoad} />
+                <Typography style={{
+                  width: `${isImg ? '200px' : "101px"}`,
+                  fontSize: "13px"
+                }}>
+                  {props.message.text.split('/').pop()}
+                </Typography>
+              </div>
         }
       </Box>
       <Box style={{ position: "relative" }}>
