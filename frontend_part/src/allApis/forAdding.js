@@ -20,7 +20,7 @@ export const login=async(data)=>{
   try {
     const response= await axios.post(`${url}/api/login`,data);
     const json=  response.data;
-
+    // console.log(response.data)
     if (json.success){ 
       // Save the auth token and redirect
       localStorage.setItem('token', json.authtoken); 

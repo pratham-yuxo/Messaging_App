@@ -42,7 +42,7 @@ filter:${darkMode?"invert(1)":" "}
 <Component >
 {
   props.messageToDisplay&& props.messageToDisplay.map(message=>
-    <Box key={message._id} ref={scrollRef}>
+    <Box  ref={scrollRef}>
       {/* {console.log(message.text)} */}
       
    <Message  message={message}></Message>

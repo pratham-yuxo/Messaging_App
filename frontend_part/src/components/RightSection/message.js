@@ -5,7 +5,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import pdf from '../../images/pdf.png'
 import file from '../../images/file.png'
 import Loader from './Loader';
-import WaveSurfer from 'wavesurfer.js';
+import AudioMessage from './messageTypes/AudioMessage';
 
 const downloadFile = (e, imageUrl) => {
   e.preventDefault();
@@ -92,38 +92,6 @@ const Message = (props) => {
     const [isLoading, setIsLoading] = useState(true);
     const [imageError, setImageError] = useState(false);
     const [audioUrl, setAudioUrl] = useState('');
-    const [playing, setPlaying] = useState(false);
-    const [hasMounted, setHasMounted] = useState(false);
-    const wavesurfer = useRef(null);
-    const containerId = `waveform-${Math.random().toString(36).substring(7)}`
-    // const containerId="a"+props.message._id
-    useEffect(() => {
-      if (!wavesurfer.current&&isAudio) {
-        wavesurfer.current = WaveSurfer.create({
-          container: document.querySelector(`#${containerId}`),
-          waveColor: '#D9DCFF',
-          progressColor: '#4353FF',
-          cursorColor: '#4353FF',
-          barWidth: 3,
-          barRadius: 3,
-          cursorWidth: 1,
-          height: 200,
-          barGap: 3
-        });
-        wavesurfer.current.load(props.message.text);
-      }
-    }, [isAudio]);
-    
-    const handlePlay = () => {
-      wavesurfer.current.play();
-      setPlaying(true);
-    }
-    
-    const handlePause = () => {
-      wavesurfer.current.pause();
-      setPlaying(false);
-    }
-    
     let src = props.message.text;
     const handleLoad = () => {
       setIsLoading(false);
@@ -131,8 +99,8 @@ const Message = (props) => {
 
     return (<>
       <Box>
+      {console.log("message.js")}
 
-        
         {
           // if it is a pdf
           isPdf ?
@@ -147,23 +115,8 @@ const Message = (props) => {
             </Box>
             :
             isAudio ?
-              // setAudioUrl(true);
-                
-              <div className={`${isSender ? "msg" : `${darkMode ? "recd" : "rec"}`}`} style={{ position: "relative" }}>
-               
-                {/* <audio src={props.message.text} controls/> */}
-                <Typography style={{
-                  width: "101px",
-                  fontSize: "13px"
-                }}>
-                  <button onClick={playing ? handlePause : handlePlay}>
-                    {playing ? 'Pause' : 'Play'}
-                  </button>
-                  <div id={containerId}></div>
 
-                  {props.message.text.split('/').pop()}
-                </Typography>
-              </div>
+                  <AudioMessage  isSender={isSender} message={props.message}/>
               // if it is a image or any other file
               :
               <div className={`${isSender ? "msg" : `${darkMode ? "recd" : "rec"}`}`} style={{ position: "relative" }}>

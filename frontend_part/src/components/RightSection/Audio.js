@@ -123,7 +123,7 @@ const cancelRecording=()=>{
         <SendIcon style={style} onClick={handleAudioUpload} />
         </>}
       {/* {console.log(audioUrl)} */}
-      {props.audioUrl && props.showAudio &&  <audio  controls  src={props.audioUrl}></audio>  }
+      {/* {props.audioUrl && props.showAudio &&  <audio  controls  src={props.audioUrl}></audio>  } */}
     </div>
   )
 }

@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "all": "concurrently \"nodemon index.js\" \"npm run start --prefix ../frontend_part\" \"nodemon ../socketServer/index.js\""
+
   },
   "author": "",
   "license": "ISC",
