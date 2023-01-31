@@ -117,3 +117,42 @@ export const uploadAudio = async (data)=>{
      console.log("error in frontend upload file",error)   
     }
 }
+
+//  for changing user profile
+
+// for editing names in db
+export const editName = async (newName,id)=>{
+  try {
+let response=await axios.put(`${url}/api/edit/name/${id}`,{name:newName},{      
+  headers: {
+  "auth-token": localStorage.getItem('token')
+}});    
+return response;
+  } catch (error) {
+   console.log("error in edit name",error)   
+  }
+}
+// changing image
+export const editImage = async (link,id)=>{
+  try {
+let response=await axios.put(`${url}/api/edit/name/${id}`,{imageUrl :link},{      
+  headers: {
+  "auth-token": localStorage.getItem('token')
+}});    
+return response;
+  } catch (error) {
+   console.log("error in edit name",error)   
+  }
+}
+// changing bio
+export const EditBio = async (newBio,id)=>{
+  try {
+let response=await axios.put(`${url}/api/edit/name/${id}`,{bio :newBio},{      
+  headers: {
+  "auth-token": localStorage.getItem('token')
+}});    
+return response;
+  } catch (error) {
+   console.log("error in edit name",error)   
+  }
+}

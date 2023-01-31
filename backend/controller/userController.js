@@ -112,3 +112,34 @@ try {
     console.log("error in controller get users",error)
 }
 }
+
+// change name
+export const setData=async(req,res)=>{
+    console.log(req.user)
+    try {
+        const { name,imageUrl } = req.body;
+        const newData = {};
+        if (name) {
+            newData.name = name;
+        }
+        if (imageUrl) {
+            newData.picture=imageUrl;
+        }
+
+
+      
+      let user = await User.findById(req.params.id);
+      if (!user) {
+          return res.status(404).send("user not found");
+        }
+        
+        user = await User.findByIdAndUpdate(req.params.id, { $set: newData }, { new: true })
+       
+         
+         res.json({success:true});
+      
+    } catch (error) {
+        res.status(500).send("some error occured");
+        
+    }
+}

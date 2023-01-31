@@ -1,5 +1,5 @@
 import express from "express";
-import { addNewUser,getUsers,getDetails,login } from "../controller/userController.js";
+import { addNewUser,getUsers,getDetails,login, setData } from "../controller/userController.js";
 import { makeConversation,getConversation } from "../controller/Conversation.js";
 import { sendMessage,getMessages } from "../controller/messageFunctions.js";
 import { uploadFile,getImage,uploadaudio, getAudio } from "../controller/imageController.js";
@@ -26,4 +26,8 @@ router.get('/file/:filename',getImage);// grid fs stream for collecting files fr
 router.get('/audiofile/:filename',getAudio);// grid fs stream for collecting files from mongodb which is present in mongodb
 
 router.post('/file/uploadAudio',uploadA.single("audio"),uploadaudio)
+
+// profile
+// edit name
+router.put('/edit/name/:id',authenticate,setData);
 export default router; 

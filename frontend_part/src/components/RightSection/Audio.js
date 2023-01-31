@@ -59,20 +59,7 @@ console.log("on stop")
         console.log(file.name,"ye file ka nam")
         props.setvalue(file.name);
       }
-      //   formData.append("file", file);
-      //   formData.append("name",`audio`);
-      //   console.log(formData)
-      //   try {
-      //     const res = await uploadFile(formData);
-      //     props.setAudioUrl('');
-      //     // props.setfile(false);
-      //     props.setimage(res.data);
-      //     props.setvalue(file.name);
-      //     console.log(res.data,"url from use effect");
-      //   } catch (error) {
-      //     console.error(error);
-      //   }
-      // }
+
     }
 upload().then(
   props.setshowAudio(false)
@@ -89,9 +76,7 @@ upload().then(
 
 const handleAudioUpload = async () => {
   setIsRecording(false);
-  // stopRecording();
-  // props.setfile(true);
-  // props.setIsRecording(false)
+
 
 }
 const cancelRecording=()=>{

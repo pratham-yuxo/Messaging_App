@@ -38,7 +38,7 @@ const ChatFooter = (props) => {
   const [showAudio, setshowAudio] = useState(false);
   const [audioUrl, setAudioUrl] = useState(null);
   const [file, setfile] = useState(false)
-
+const [val, setval] = useState('')
 
   const Box4 = styled(Box)`
   padding: 5px 10px;
@@ -100,25 +100,25 @@ order:3;
     getImage();
   }, [props.file])
 
-  // useEffect(() => {
-  //   if (loader) {
-
-  //     document.body.style.background = 'black';
-  //   }
-
-  // }, [loader])
-
   const onchange = (e) => {
     props.setFile(e.target.files[0])// file is present in a event ,on 0th value of files array
     console.log(e)
+    setval(e.target.files[0].name);
     props.setvalue(e.target.files[0].name)
   }
   const handleChange = (e) => {
     const newVal = e.target.value;
-    requestAnimationFrame(() => {
-        
-        props.setvalue(newVal);
-    });
+    setval(newVal);
+
+  }
+  const handleEnter=(e)=>{
+    if (e.which==13) {
+      
+      props.setvalue(val); 
+      console.log("settomg"); 
+      setval('');
+       props.sendChat(e,val);
+    }
   }
   return (
     <div>
@@ -153,8 +153,8 @@ order:3;
         autoFocus={true}
           placeholder='Type a message to sent'
           onChange={handleChange}
-          onKeyPress={(e) => props.sendChat(e)}
-          value={props.value}
+          onKeyPress={handleEnter}
+          value={val}
           sx={{color:`${darkMode && "white"}`}}
         />
         {/* onkeypress will be called when any key is press */}
@@ -170,7 +170,7 @@ order:3;
            <Audio setimage={props.setimage} setvalue={props.setvalue} file={file} setfile={props.setFile} audioUrl={audioUrl} setAudioUrl={setAudioUrl} showAudio={showAudio} setshowAudio={setshowAudio} style={style}/>  
           : <SendIcon
             onClick={
-              () => { let e = { which: 13 }; props.sendChat(e) }
+              () => { let e = { which: 13 }; props.sendChat(e,val);setval('') }
             }
             style={style}
           />

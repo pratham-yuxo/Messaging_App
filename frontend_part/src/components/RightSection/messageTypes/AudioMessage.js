@@ -1,36 +1,34 @@
-import React, { useContext, useState, useEffect, useRef } from 'react'
+import React, { useContext, useState, useEffect, useRef,useMemo } from 'react'
 import WaveSurfer from 'wavesurfer.js';
 import { Box, styled, Typography } from '@mui/material'
 import AccountContext from '../../../context/accountContext';
 
 const AudioMessage = (props) => {
     let isAudio = props.message.text.includes('.mp3');
-    const { Details, darkMode } = useContext(AccountContext)
-
+    const {  darkMode } = useContext(AccountContext)
+  const [audio, setaudio] = useState(props.message.text);
     const [playing, setPlaying] = useState(false);
-    const [hasMounted, setHasMounted] = useState(false);
-    // const wavesurfer = useRef(null);
     const wavesurferRef = useRef(null);
+    const text = useMemo(() => props.message.text, [props.message.text]);
 
-    // let wavesurfer=null;
     // here we have to use dynamic id for our wave part
     // const containerId = `waveform-${Math.random().toString(36).substring(7)}`
     const buttonId = `button-${Math.random().toString(36).substring(7)}`
     const containerId="a"+props.message._id
     useEffect(() => {
+      console.log("audio updating",props.message.text)
       buttonRef.current.style.pointerEvents = 'none';
       if (  isAudio&&!wavesurferRef.current) {
         console.log("inside if")
         wavesurferRef.current = WaveSurfer.create({
           container: document.getElementById(containerId),
           waveColor: '#D9DCFF',
-          progressColor: '#4353FF',
-          cursorColor: '#4353FF',
+          progressColor: 'black',
+          cursorColor: 'black',
           barWidth: 3,
           barRadius: 3,
           cursorWidth: 1,
           height: 62,
-          // display: "flex",
           barGap: 3
         });
         wavesurferRef.current.load(props.message.text);
@@ -45,7 +43,7 @@ const AudioMessage = (props) => {
        });
       }
 
-    }, []);
+    }, [text]);
     // useEffect(() => {
     //   console.log("playing",playing,wavesurferRef)
     //   if (playing && wavesurferRef.current) {
@@ -109,12 +107,7 @@ const AudioMessage = (props) => {
       </div>
     </BoxAudio>
 
-    <Typography style={{
-      width: "101px",
-      fontSize: "13px"
-    }}>
-      {props.message.text.split('/').pop()}
-    </Typography>
+
   </div>
   )
 }

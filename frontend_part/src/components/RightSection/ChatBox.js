@@ -44,11 +44,11 @@ const ChatBox = () => {
   }, [conversation, incomingMsg])
 
 
-  const sendChat = async (e) => {
+  const sendChat = async (e,val) => {
     //the e.which of enter key is 13
     // const code = e.which;
     let code = e.keyCode || e.which;
-    if(!value) return;
+    if(!val) return;
     //here we will check if the key that has been pressed is enter or not
 
     if (code === 13) {
@@ -61,7 +61,7 @@ const ChatBox = () => {
           receiverId: chatOfPersonOnWhichUHaveClicked.email,
           conversationId: conversation._id,
           type: 'text',
-          text: value,
+          text: val,
         }
       }
       else {
@@ -93,7 +93,7 @@ const ChatBox = () => {
         <ChatHeader person={chatOfPersonOnWhichUHaveClicked} />
       </Animated>
       
-      <MessageSection value={value} setmessageToDisplay={setmessageToDisplay} messageToDisplay={messageToDisplay} msgflag={msgflag} setmsgflag={setmsgflag} conversation={conversation} person={chatOfPersonOnWhichUHaveClicked} />
+      <MessageSection  value={value} setmessageToDisplay={setmessageToDisplay} messageToDisplay={messageToDisplay} msgflag={msgflag} setmsgflag={setmsgflag} conversation={conversation} person={chatOfPersonOnWhichUHaveClicked} />
       <Animated
         animationIn='slideInUp'
         animationInDuration={400}

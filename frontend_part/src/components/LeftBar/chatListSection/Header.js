@@ -51,7 +51,6 @@ const handleChange = (e) => {
 }
 const handleOpen=()=>{
   setisOpen(true);
-  console.log(isOpen)
 }
 
 
@@ -73,9 +72,7 @@ const handleOpen=()=>{
                     <div>
                      
                 <CssTextField
-                // ref={textFieldRef}
                 value={val}
-                // defaultValue={props.searchChatlist}
                 autoFocus={val===''?false:true}
                  onChange={handleChange} size='small'   id="outlined-basic" label="Search chats" variant="outlined"
                 InputProps={{

@@ -30,10 +30,7 @@ const Home = () => {
 
     const fun = async () => {
       if (localStorage.getItem('token')) {
-        console.log("token found")
-        console.log(localStorage.getItem('token'))
         let details;
-        if (!Details) {
 
           details = await fetchDetails();
           console.log("details by fetching",details)
@@ -41,7 +38,7 @@ const Home = () => {
           if (!details) {
             history('/login');
 
-          }
+          
         }
       }
       else {

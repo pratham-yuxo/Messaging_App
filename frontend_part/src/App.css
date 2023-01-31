@@ -265,6 +265,16 @@ cursor: pointer;
     background-image: url(./logoo.jpg);
     
   }
+  .badge::after{
+    content: "";
+    position: absolute;
+    width: 20px;
+    top: -3px;
+    right: 66px;
+    height: 20px;
+    background: linear-gradient(219deg, #6e7680 0%,#6e7680 50%,transparent 50%, transparent);
+    transform: rotate(316deg);
+  }
 
   /* for design of msg  */
   .msg::before{

@@ -33,7 +33,7 @@ const newSchema = new Schema({
     picture: {
         type: String,
     },
-    giver_name: {
+    username: {
         type: String,
     },
     family_name: {
@@ -50,6 +50,9 @@ const newSchema = new Schema({
     },
     byGoogle:{
         type: Boolean,
+    },
+    bio:{
+        type:String
     }
     // editname:{
     //     type:String,

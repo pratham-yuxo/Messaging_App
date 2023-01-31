@@ -57,7 +57,7 @@ const Message = (props) => {
 
 
   const Box1 = styled(Box)`
-  background:${isSender ? darkMode ? "linear-gradient( 180deg, #9611b9 0%, rgb(10 61 155) 51%, #1a7eed 92% ) no-repeat center" : "#7a84ff;" : darkMode ? "#243156" : "white"};
+  background:${isSender ? darkMode ? "linear-gradient( 180deg, #9611b9 0%, rgb(10 61 155) 51%, #1a7eed 92% ) no-repeat center" : "#4955e9;" : darkMode ? "#243156" : "white"};
   // #dbdbdb
   max-width: 60%;
   margin-${isSender ? "left" : "right"}:auto;
@@ -68,10 +68,8 @@ const Message = (props) => {
   word-break:break-word;
   box-shadow: 0 1px 0.5px rgba(11,20,26,.13);
   margin-${isSender ? "right" : "left"}: 64px;
-  // background: linear-gradient( 180deg, rgba(139, 47, 184, 1) 0%, rgba(103, 88, 205, 1) 51%, rgba(89, 116, 219, 1) 92% ) no-repeat center;
   background-attachment: ${isSender && "fixed"};
-  // margin-bottom:2px;
-  color:${darkMode ? '#e9edef' : 'black'};
+  color:${darkMode ? '#e9edef' : 'white'};
   `
 
 
@@ -90,8 +88,6 @@ const Message = (props) => {
   let isAudio = props.message.text.includes('.mp3');
   const ImgMsg = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [imageError, setImageError] = useState(false);
-    const [audioUrl, setAudioUrl] = useState('');
     let src = props.message.text;
     const handleLoad = () => {
       setIsLoading(false);
@@ -99,8 +95,6 @@ const Message = (props) => {
 
     return (<>
       <Box>
-      {console.log("message.js")}
-
         {
           // if it is a pdf
           isPdf ?
@@ -132,12 +126,7 @@ const Message = (props) => {
                   height: `${isImg ? '180px' : "130"}`,
                   width: `${isImg ? '203px' : ""}`
                 }} onLoad={handleLoad} />
-                <Typography style={{
-                  width: `${isImg ? '200px' : "101px"}`,
-                  fontSize: "13px"
-                }}>
-                  {props.message.text.split('/').pop()}
-                </Typography>
+
               </div>
         }
       </Box>
