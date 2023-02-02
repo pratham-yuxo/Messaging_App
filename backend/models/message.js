@@ -16,7 +16,16 @@ const newSchema =new mongoose.Schema({
     type:{
         type:String
 
-    }
+    },
+    senderDeleted:{
+        type:Boolean,
+        default:false
+    },
+    receiverDeleted:{
+        type:Boolean,
+        default:false
+    },
+
 
 },
 { timestamps:true}

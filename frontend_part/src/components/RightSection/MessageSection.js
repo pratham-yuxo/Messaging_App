@@ -8,7 +8,7 @@ import AccountContext from '../../context/accountContext'
 
 
 const MessageSection = (props) => {
-const {darkMode} = useContext(AccountContext);
+const {Details,darkMode} = useContext(AccountContext);
   const Box1=styled(Box)`
 background-image: url(${image});
 filter:${darkMode?"invert(1)":" "}
@@ -38,15 +38,21 @@ filter:${darkMode?"invert(1)":" "}
   }, [props.messageToDisplay,props.value])
   return (
 <Box1>
-  {/* <img src={image} alt="" /> */}
 <Component >
 {
   props.messageToDisplay&& props.messageToDisplay.map(message=>
-    <Box  ref={scrollRef}>
-      {/* {console.log(message.text)} */}
+  //  ensuring that deleted msg by user should not be displayed
+ {
+  return !(  ( message.senderDeleted && (Details.email === message.senderId)) ||  
+    (message.receiverDeleted && (Details.email != message.senderId))) &&
+ 
+ <Box key={message._id}  ref={scrollRef}>
       
    <Message  message={message}></Message>
-   </Box>)
+   </Box>
+   }
+   
+   )
   
 }
 </Component>

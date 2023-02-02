@@ -156,3 +156,28 @@ return response;
    console.log("error in edit name",error)   
   }
 }
+// messagess
+export const DeleteForEveryone=async(msgId)=>{
+  try {
+    let response= await axios.put(`${url}/api/delete/forEveryone/${msgId}`,{},{      
+      headers: {
+      "auth-token": localStorage.getItem('token')
+    }});
+    return response;
+    
+  } catch (error) {
+    console.log(error,"error in del for ev")
+  }
+}
+export const DeleteForMe=async(msgId)=>{
+  try {
+    let response= await axios.put(`${url}/api/delete/forMe/${msgId}`,{},{      
+      headers: {
+      "auth-token": localStorage.getItem('token')
+    }});
+    return response;
+    
+  } catch (error) {
+    console.log(error,"error in del for ev")
+  }
+}

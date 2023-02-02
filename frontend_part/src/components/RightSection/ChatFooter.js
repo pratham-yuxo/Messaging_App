@@ -86,17 +86,16 @@ order:3;
         const data = new FormData();
         data.append("name", props.file.name);
         data.append("file", props.file);
-        console.log(props.file)
         setloaderf(true);
         let response = await uploadFile(data);
         response && setloaderf(false);
         props.setimage(response.data);
-        console.log(response.data)
-        // console.log("efs")
+       
         // response.data is the link to download file
       }
 
     }
+    console.log(props.value,"chat footer")
     getImage();
   }, [props.file])
 
@@ -167,7 +166,7 @@ order:3;
 
         {
           props.value === '' ?
-           <Audio setimage={props.setimage} setvalue={props.setvalue} file={file} setfile={props.setFile} audioUrl={audioUrl} setAudioUrl={setAudioUrl} showAudio={showAudio} setshowAudio={setshowAudio} style={style}/>  
+           <Audio setimage={props.setimage} setval={setval} setvalue={props.setvalue} file={file} setfile={props.setFile} audioUrl={audioUrl} setAudioUrl={setAudioUrl} showAudio={showAudio} setshowAudio={setshowAudio} style={style}/>  
           : <SendIcon
             onClick={
               () => { let e = { which: 13 }; props.sendChat(e,val);setval('') }

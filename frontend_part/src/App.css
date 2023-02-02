@@ -18,6 +18,9 @@ html,body{
 
   /* background: -webkit-linear-gradient(left, #a445b2, #fa4299); */
 }
+svg{
+  cursor: pointer;
+}
 ::selection{
   background: #fa4299;
   color: #fff;
@@ -782,3 +785,11 @@ margin-left:auto;
 /* wave{
   width: 101px;
 } */
+/* messages */
+.show{
+  visibility: hidden;
+}
+.del{
+  visibility: hidden;
+    position: absolute;
+}

@@ -1,7 +1,7 @@
 import express from "express";
 import { addNewUser,getUsers,getDetails,login, setData } from "../controller/userController.js";
 import { makeConversation,getConversation } from "../controller/Conversation.js";
-import { sendMessage,getMessages } from "../controller/messageFunctions.js";
+import { sendMessage,getMessages,deleteForEveryone, deleteForMe } from "../controller/messageFunctions.js";
 import { uploadFile,getImage,uploadaudio, getAudio } from "../controller/imageController.js";
 import upload from "../middleware/upload.js";
 import uploadA from "../middleware/uploadA.js";
@@ -30,4 +30,8 @@ router.post('/file/uploadAudio',uploadA.single("audio"),uploadaudio)
 // profile
 // edit name
 router.put('/edit/name/:id',authenticate,setData);
+// messsages
+// deletion
+router.put('/delete/forEveryone/:id',authenticate,deleteForEveryone);
+router.put('/delete/forMe/:id',authenticate,deleteForMe);
 export default router; 

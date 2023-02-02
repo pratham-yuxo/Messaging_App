@@ -14,24 +14,7 @@ useEffect(() => {
 
 }, [props.showAudio])
 
-  // const upload=async()=>{
-  //   if (props.file && props.audioUrl) {
-      
-  //     const formData = new FormData();
-  //     const file = await convertUrlToFile(props.audioUrl);
-  //     formData.append("file", file);
-  //     formData.append("name",`audio`);
-      
-  //     try {
-  //       const res = await uploadFile(formData);
-  //       props.setAudioUrl('');
-  //       props.setfile(false);
-  //       console.log(res.data,"url from use effect");
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  // }
+
 
 
   const startRecording = () => {
@@ -40,16 +23,10 @@ useEffect(() => {
 
   }
   
-  const stopRecording = () => {
-    console.log("stopped")
 
-
-  }
   
 
     const onStop = (recordedBlob) => {
-console.log("on stop")
-    console.log('recordedBlob is: ', recordedBlob.blobURL);
     const upload=async()=>{
       if (recordedBlob.blobURL) {
         
@@ -57,6 +34,7 @@ console.log("on stop")
         const file = await convertUrlToFile(recordedBlob.blobURL);
         props.setfile(file);
         console.log(file.name,"ye file ka nam")
+        props.setval(file.name)
         props.setvalue(file.name);
       }
 
@@ -69,7 +47,6 @@ upload().then(
    const convertUrlToFile=async(url)=> {
     console.log("converting file")
     const response = await fetch(url);
-    // props.setAudioUrl(null);
     const blob = await response.blob();
     return new File([blob], `voiceRecord.mp3`, { type: 'audio/mp3' });
 }

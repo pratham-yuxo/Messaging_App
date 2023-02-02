@@ -11,7 +11,7 @@ import AccountContext from '../context/accountContext';
 import { Animated } from "react-animated-css";
 import { createUser, login } from '../allApis/forAdding';
 // images
-import logo from "../images/ogol.png";
+import logo from "../images/newLogo.png";
 import { useNavigate } from 'react-router-dom'
 import bg1 from '../images/bg4.png';
 import { FormControl, IconButton, InputAdornment, InputLabel, Input } from '@mui/material';

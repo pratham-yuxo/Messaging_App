@@ -4,7 +4,7 @@ const authenticate=(req,res,next)=>{
     //get user from the jwt token and add id to request
     const token=req.header('auth-token');
     if (!token) {
-        res.status(401).send({error:"not a valid token"})
+        res.status(401).send({error:"token not found"})
         
     }
     try {

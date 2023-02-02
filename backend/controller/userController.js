@@ -116,6 +116,9 @@ try {
 // change name
 export const setData=async(req,res)=>{
     console.log(req.user)
+    if (req.user.id!=req.params.id) {
+        res.status(500).send("invalid user")
+    }
     try {
         const { name,imageUrl } = req.body;
         const newData = {};
