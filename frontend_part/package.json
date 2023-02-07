@@ -25,6 +25,7 @@
     "react-mic": "^12.4.6",
     "react-router-dom": "^6.6.1",
     "react-scripts": "^5.0.1",
+    "simple-peer": "^9.11.1",
     "socket.io-client": "^4.5.4",
     "styled-components": "^5.3.6",
     "wavesurfer.js": "^6.4.0",

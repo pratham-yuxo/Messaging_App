@@ -9,7 +9,6 @@ const Audio = (props) => {
   const [isRecording, setIsRecording] = useState(false);
 
 useEffect(() => {
-  console.log("component rendered",props.showAudio)
   setIsRecording(props.showAudio);
 
 }, [props.showAudio])
@@ -19,7 +18,6 @@ useEffect(() => {
 
   const startRecording = () => {
     props.setshowAudio(true);
-    console.log("started")
 
   }
   
@@ -33,7 +31,7 @@ useEffect(() => {
         // const formData = new FormData();
         const file = await convertUrlToFile(recordedBlob.blobURL);
         props.setfile(file);
-        console.log(file.name,"ye file ka nam")
+       
         props.setval(file.name)
         props.setvalue(file.name);
       }
@@ -45,7 +43,6 @@ upload().then(
     
   }
    const convertUrlToFile=async(url)=> {
-    console.log("converting file")
     const response = await fetch(url);
     const blob = await response.blob();
     return new File([blob], `voiceRecord.mp3`, { type: 'audio/mp3' });
@@ -84,9 +81,7 @@ const cancelRecording=()=>{
         />
         <SendIcon style={style} onClick={handleAudioUpload} />
         </>}
-      {/* {console.log(audioUrl)} */}
-      {/* {props.audioUrl && props.showAudio &&  <audio  controls  src={props.audioUrl}></audio>  } */}
-    </div>
+ </div>
   )
 }
 

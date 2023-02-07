@@ -88,7 +88,7 @@ right: 14px;
 
     const { Details, setDetails } = useContext(AccountContext);
     const [isHovered, setIsHovered] = useState(false);
-    const [isHoveredBio, setIsHoveredBio] = useState(true);
+    const [isHoveredBio, setIsHoveredBio] = useState(false);
     const [edit, setedit] = useState(false);
     const [editBio, seteditBio] = useState(false);
     const [val, setVal] = useState(Details.name);

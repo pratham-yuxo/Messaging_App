@@ -8,12 +8,10 @@ export  const addNewUser=async (req,res)=>{
         // finding if the user with given email id exists
     const find=await User.findOne({email:req.body.email})
     if (find) {
-        console.log("user found")
         // user already exists
         // it means if byGoogle is false ,then email is already registered
         if (req.body.byGoogle) {
-            console.log("uf by google")
-            console.log("user with this email id already exist");
+
             const data = {
                 user: {
                     id: find._id
@@ -25,7 +23,6 @@ export  const addNewUser=async (req,res)=>{
             res.json({success, authtoken });
         }
         else{
-            console.log("by google false")
             success=false;
             res.status(500).json({
                 "message":"This e-mail id has already signed up"
@@ -34,16 +31,13 @@ export  const addNewUser=async (req,res)=>{
         
     }
     else{ 
-        console.log("not found")
         if (!req.body.byGoogle) {
-            console.log("by google false")
             const salt = await bcrypt.genSalt(10);
             //it returns a promise
             const bcryptedPassword = await bcrypt.hash(req.body.password, salt);
             req.body.password=bcryptedPassword;
             
         }
-        console.log("by google true")
         const newUser = new User(req.body)
         await newUser.save();
         console.log(newUser)
@@ -55,7 +49,6 @@ export  const addNewUser=async (req,res)=>{
           }
     
     const authtoken = jwt.sign(data, JWT_SECRET)
-    console.log(authtoken),newUser;
     success=true;
     res.json({success, authtoken });
         }
@@ -79,7 +72,6 @@ export const login=async(req,res)=>{
         if (!comparePassword) {
           return res.status(400).json({success, error: "wrong credentials" })
         }
-        console.log(user.id, "backend login")
         const data = {
           user: {
             id: user.id
@@ -95,7 +87,6 @@ export const login=async(req,res)=>{
 export const getDetails=async(req,res)=>{
     try {
         const Details=await User.findOne({_id:req.user.id})
-        console.log('get details',Details)
         res.json(Details);
         
     } catch (error) {

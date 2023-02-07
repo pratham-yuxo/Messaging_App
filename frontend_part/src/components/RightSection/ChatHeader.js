@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 // import defaultI from '../../images/new2.png'
 import AccountContext from '../../context/accountContext';
 import noUser from '../../images/new4.png'
+import VideocamIcon from '@mui/icons-material/Videocam';
 //       ------------styling----------------
 
 const Box3 = styled(Box)`
@@ -31,7 +32,7 @@ margin-left: 20px;
 const Box5 = styled(Box)`
 padding: 8px 8px;
 color: #54656f;
-
+margin-left: 10px;
 `
 const Box6= styled(Box)`
 padding: 8px 8px;
@@ -41,7 +42,10 @@ color: #54656f;
 
 
 const ChatHeader = (props) => {
-    const {activeUsers,darkMode} = useContext(AccountContext)
+    const {setVideoCall,activeUsers,darkMode} = useContext(AccountContext)
+    const startVideocall=()=>{
+        setVideoCall(true);
+    }
     const Typography1=styled(Typography)`
    color: ${darkMode?"white":"black"}
     `
@@ -73,6 +77,10 @@ const ChatHeader = (props) => {
 
             {/* icons */}  
             <Box4>
+                {/* video call icon */}
+            <Box5 onClick={startVideocall}>
+                <VideocamIcon/>
+            </Box5>
                 {/* search */}
                 <Box5>
                     <SearchIcon/>

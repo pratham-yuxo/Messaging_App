@@ -20,7 +20,6 @@ const LeftDrawer = (props) => {
   const [isOpen, setisOpen] = useState(false)
   useEffect(() => {
     setisOpen(props.isOpen)
-    console.log(props.isOpen)
   
   }, [props.isOpen])
   const handleclose=()=>{
@@ -45,7 +44,6 @@ const LeftDrawer = (props) => {
               }
             }}
           >
-            {console.log("first")}
     <div className='side' >
           
           <div  style={{

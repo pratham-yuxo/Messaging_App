@@ -16,10 +16,8 @@ const AudioMessage = (props) => {
     const buttonId = `button-${Math.random().toString(36).substring(7)}`
     const containerId="a"+props.message._id
     useEffect(() => {
-      console.log("audio updating",props.message.text)
       buttonRef.current.style.pointerEvents = 'none';
       if (  isAudio&&!wavesurferRef.current) {
-        console.log("inside if")
         wavesurferRef.current = WaveSurfer.create({
           container: document.getElementById(containerId),
           waveColor: '#D9DCFF',
@@ -44,16 +42,6 @@ const AudioMessage = (props) => {
       }
 
     }, [text]);
-    // useEffect(() => {
-    //   console.log("playing",playing,wavesurferRef)
-    //   if (playing && wavesurferRef.current) {
-    //     wavesurferRef.current.play();
-    //     } else {
-    //     wavesurferRef.current.pause();
-    //     }
-    //     }, [playing]);
-    
- 
 
     const BoxAudio = styled(Box)`
     display:flex;

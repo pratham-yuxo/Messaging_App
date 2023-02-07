@@ -3,10 +3,12 @@ import ChatBox from "./RightSection/ChatBox"
 import LeftSideBar from "./LeftBar/chatListSection/LeftSideBar"
 import EmptyChat from './RightSection/EmptyChat'
 import AccountContext from '../context/accountContext'
-import AddDialog from './AddFriendSection/AddDialog'
+// import AddDialog from './AddFriendSection/AddDialog'
 import { useNavigate } from 'react-router-dom'
 import { fetchDetails } from '../allApis/forAdding'
-
+import VideoUi from './RightSection/VideoCallSection.js/VideoUi'
+import { ContextProvider } from '../context/contextForVc/VcContext'
+import Notifications from './RightSection/VideoCallSection.js/Notifications'
 // "maxWidth":"46%",
 // "minWidth":"344px",
 // "width":"436px",
@@ -16,7 +18,7 @@ import { fetchDetails } from '../allApis/forAdding'
 const Home = () => {
 
   let history = useNavigate();
-  const { darkMode, dialogbox, setDetails, Details, chatOfPersonOnWhichUHaveClicked, loader, socket } = useContext(AccountContext);
+  const {videoCall, darkMode, setDetails, Details, chatOfPersonOnWhichUHaveClicked, loader, socket } = useContext(AccountContext);
   const chat = {
     "width": "70%",
     "minWidth": "501px",
@@ -26,14 +28,13 @@ const Home = () => {
     flex: '1'
   }
   useEffect(() => {
-    // console.log("Details")
+   
 
     const fun = async () => {
       if (localStorage.getItem('token')) {
         let details;
 
           details = await fetchDetails();
-          console.log("details by fetching",details)
           setDetails(details);
           if (!details) {
             history('/login');
@@ -42,7 +43,7 @@ const Home = () => {
         }
       }
       else {
-        console.log("here")
+       
         history('/login');
       }
 
@@ -74,10 +75,11 @@ const Home = () => {
   }
   return (
     <div >
-
-
-      {dialogbox && <div style={{ position: "relative" }}><AddDialog /></div>}
-      {Details && <div style={upperDiv}>
+      <ContextProvider>
+      <Notifications/>
+    { videoCall &&   <VideoUi/>}
+    </ContextProvider>
+      {Details && !videoCall && <div style={upperDiv}>
 
         <div style={sideBar}>
           <LeftSideBar />
@@ -85,7 +87,7 @@ const Home = () => {
         </div>
 
         <div style={chat}>
-          {console.log("home")}
+        
           {Object.keys(chatOfPersonOnWhichUHaveClicked).length ? <ChatBox /> : <EmptyChat />}
         </div>
 

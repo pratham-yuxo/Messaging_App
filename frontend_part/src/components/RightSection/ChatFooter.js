@@ -95,13 +95,11 @@ order:3;
       }
 
     }
-    console.log(props.value,"chat footer")
     getImage();
   }, [props.file])
 
   const onchange = (e) => {
     props.setFile(e.target.files[0])// file is present in a event ,on 0th value of files array
-    console.log(e)
     setval(e.target.files[0].name);
     props.setvalue(e.target.files[0].name)
   }
@@ -114,7 +112,6 @@ order:3;
     if (e.which==13) {
       
       props.setvalue(val); 
-      console.log("settomg"); 
       setval('');
        props.sendChat(e,val);
     }

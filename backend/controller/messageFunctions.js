@@ -29,10 +29,8 @@ export const deleteForEveryone=async(req,res)=>{
 
 try {
    let msg= await message.findOne({_id:req.params.id});//finding through params not query
-   console.log(msg)
    let user= await User.findOne({_id:req.user.id})
    if (msg.senderId!=user.email) {
-    console.log(msg.senderId, user.email)
     return res.json({success:false,error:"invalid user"});
     
    }
@@ -56,9 +54,7 @@ export const deleteForMe=async(req,res)=>{
 try {
     let helper=null;
    let msg= await message.findOne({_id:req.params.id});//finding through params not query
-   console.log(msg)
    let user= await User.findOne({_id:req.user.id});
-   console.log(msg.senderId, user.email)
 //    the deleter is sender
 const newData = {};
 if (msg.senderId==user.email) {

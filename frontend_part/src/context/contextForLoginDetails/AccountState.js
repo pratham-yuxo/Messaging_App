@@ -14,6 +14,7 @@ const [dialogbox, setDialogbox] = useState(false);
 // to store the list of active users
 const [activeUsers, setactiveUsers] = useState([])
 const [darkMode, setdarkMode] = useState(false);
+const [videoCall, setVideoCall] = useState(false)
   const socket =useRef();
 useEffect(() => {
   
@@ -35,7 +36,9 @@ socket.current=io('ws://localhost:8000')//address of backend where server of soc
     setDialogbox,
     dialogbox,
     darkMode,
-    setdarkMode
+    setdarkMode,
+    videoCall,
+    setVideoCall
     }}>
         {props.children}
     </AccountContext.Provider>
