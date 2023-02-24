@@ -233,8 +233,6 @@ Use this space to list resources you find helpful and would like to give credit 
 [product-screenshot]: images/Screenshott.png
 [product-screenshot2]: images/video.png
 [product-screenshot3]: images/audio.png
-[video] : images/video.png
-[audio] : images/audio.png
 [Next.js]: https://img.shields.io/badge/javascript-black?logo=javascript
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
