@@ -26,8 +26,8 @@ flex-direction:column;
 align-items:center;
 justify-content:center;
 & > img{
-  height:90px;
-  margin: 10px;
+  height:70px;
+  margin: 25px;
 }
 `
 const Box2 = styled(Box)`
@@ -225,7 +225,7 @@ const Login = () => {
                         color: "red",
                         fontSize: "12px"
                       }} name="password" component="div" />}
-                      <div className="pass-link"><a href="/">Forgot password?</a></div>
+                      {/* <div className="pass-link"><a href="/">Forgot password?</a></div> */}
                       <div className="container-login100-form-btn">
                         <div className="wrap-login100-form-btn">
                           <div className="login100-form-bgbtn"></div>
@@ -235,7 +235,7 @@ const Login = () => {
                         </div>
                       </div>
                       <div className="signup-link">
-                        Not a member?<a href='/' ref={ref} onClick={onclickSignup}>Signup now</a>
+                        Not a member?<a style={{color:"black",fontSize:"13px"}} href='/' ref={ref} onClick={onclickSignup}>Signup now</a>
                       </div>
                       <div className="googlebox">
                         <span>or</span>

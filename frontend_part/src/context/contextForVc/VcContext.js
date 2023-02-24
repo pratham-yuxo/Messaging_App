@@ -62,10 +62,10 @@ useEffect(() => {
 }, [])
 
 const answerCall = () => {
- !videoCall && setVideoCall(true);
+//  !videoCall && setVideoCall(true);
   setCallAccepted(true);
 
- setTimeout(() => {
+
   
    //  initiator false means we are not initiating this call, we are just picking it up
    const peer = new Peer({ initiator: false, trickle: false, stream });        // we are getting stream from use effect
@@ -85,8 +85,7 @@ const answerCall = () => {
     peer.signal(call.signal);
     
     connectionRef.current = peer;
-    
-  }, 100);
+
   };
   // getting socket id of the person which you are calling
 

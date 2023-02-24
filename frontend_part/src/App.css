@@ -96,6 +96,18 @@ input[type="radio"]{
 /* input{
   background-color: black;
 } */
+.login {
+  display: flex;
+  flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.signup{
+  display: flex;
+  flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 #signup:checked ~ .slider-tab{
   left: 50%;
 }
@@ -211,15 +223,32 @@ form .btn input[type="submit"]{
 }
 /* for login page */
 .googlebox{
+  position: relative;
   margin-top: 15px;
   margin-bottom: 15px;
-  border-bottom:1px solid #979faf;
+  /* border-bottom:1px solid #979faf; */
   text-align: center;
   line-height: 0.1em;
 }
+.googlebox::after{
+  content: "";
+  position: absolute;
+  width: 147px;
+  height: 2px;
+  background: #3c3c3c;
+  left: 28px;
+}
+.googlebox::before{
+  content: "";
+  position: absolute;
+  width: 147px;
+  height: 2px;
+  background: #3c3c3c;
+  right: 28px;
+}
 .googlebox span{
   padding: 0 10px;
-  color: white;
+  color: black;
   /* background-color: #fff; */
 }
 /* to hide that nasty vertical scrollbar */
@@ -359,6 +388,8 @@ cursor: pointer;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 94%;
+  margin-top: 26px;
 }
 
 .wrap-login100-form-btn {
