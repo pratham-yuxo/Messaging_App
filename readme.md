@@ -68,9 +68,13 @@
 This chat application enables user to chat not only in text but also with voice messages and even with video calling. You can even send any kind of document.
 
 Here we are doing real time chat with the help of socket.io
-[audio]
+
+[![Product Name Screen Shot][product-screenshot3]](https://example.com)
+
+
 Voice Message service is enabled using wavesufer.js
-[video]
+
+![Product Name Screen Shot][product-screenshot2]]
 This app can make a video call in realtime with Web rtc
 
 Why you should contribute in this?
@@ -227,6 +231,8 @@ Use this space to list resources you find helpful and would like to give credit 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/pratham-73820b224/
 [product-screenshot]: images/Screenshott.png
+[product-screenshot2]: images/video.png
+[product-screenshot3]: images/audio.png
 [video] : images/video.png
 [audio] : images/audio.png
 [Next.js]: https://img.shields.io/badge/javascript-black?logo=javascript
