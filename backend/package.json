@@ -7,7 +7,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "all": "concurrently \"nodemon index.js\" \"npm run start --prefix ../frontend_part\" \"nodemon ../socketServer/index.js\""
-
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +20,7 @@
     "mongoose": "^6.8.1",
     "multer": "^1.4.5-lts.1",
     "multer-gridfs-storage": "^5.0.2",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "socket.io": "^4.7.4"
   }
 }

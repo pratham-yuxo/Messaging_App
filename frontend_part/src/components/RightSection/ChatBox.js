@@ -1,110 +1,136 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Box } from '@mui/material'
-import ChatHeader from './ChatHeader'
-import MessageSection from './MessageSection'
-import ChatFooter from './ChatFooter'
-import AccountContext from '../../context/accountContext'
+import React, { useContext, useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import ChatHeader from "./ChatHeader";
+import MessageSection from "./MessageSection";
+import ChatFooter from "./ChatFooter";
+import AccountContext from "../../context/accountContext";
 import { Animated } from "react-animated-css";
-import { getConversation, sendMessage } from '../../allApis/forAdding'
+import { getConversation, sendMessage } from "../../allApis/forAdding";
 
 const ChatBox = () => {
-  const { msgflag, setmsgflag, chatOfPersonOnWhichUHaveClicked, Details, socket } = useContext(AccountContext)
+  const {
+    msgflag,
+    setmsgflag,
+    chatOfPersonOnWhichUHaveClicked,
+    Details,
+    socket,
+  } = useContext(AccountContext);
   // when u clicked a chat then use effect will get all the chats through get conversation api and will pass it to message section as a prop
-  const [conversation, setconversation] = useState({})
-  const [value, setvalue] = useState('')// value is the text which is currently written in the field input
-  const [file, setFile] = useState(null);//for sending file
-  const [image, setimage] = useState('')
-  const [incomingMsg, setincomingMsg] = useState(null)
-  const [messageToDisplay, setmessageToDisplay] = useState([])
+  const [conversation, setconversation] = useState({});
+  const [value, setvalue] = useState(""); // value is the text which is currently written in the field input
+  const [file, setFile] = useState(null); //for sending file
+  const [image, setimage] = useState("");
+  const [incomingMsg, setincomingMsg] = useState(null);
+  const [messageToDisplay, setmessageToDisplay] = useState([]);
 
   useEffect(() => {
     const getMessages = async () => {
-      let messages = await getConversation({ senderId: Details.email, receiverId: chatOfPersonOnWhichUHaveClicked.email })
-      // console.log(messages)
+      let messages = await getConversation({
+        senderId: Details.email,
+        receiverId: chatOfPersonOnWhichUHaveClicked.email,
+      });
+      console.log("chatbox", messages);
       setconversation(messages);
-    }
+    };
     getMessages();
-  }, [chatOfPersonOnWhichUHaveClicked.email])
+  }, [chatOfPersonOnWhichUHaveClicked.email]);
   //this will run whenever the person id changes or when you  click on a chat list item
 
   // socket stuff
   useEffect(() => {
-    socket.current.on('getMessage', data => {
+    socket.current.on("getMessage", (data) => {
       setincomingMsg({
         ...data,
-        createdAt: Date.now()
-      })
-    })
-  }, [])
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
 
   useEffect(() => {
-    incomingMsg && conversation?.members?.includes(incomingMsg.senderId) &&
-      setmessageToDisplay(prev => [...prev, incomingMsg])
+    incomingMsg &&
+      conversation?.members?.includes(incomingMsg.senderId) &&
+      setmessageToDisplay((prev) => [...prev, incomingMsg]);
+  }, [conversation, incomingMsg]);
 
-  }, [conversation, incomingMsg])
-
-
-  const sendChat = async (e,val) => {
+  const sendChat = async (e, val) => {
     //the e.which of enter key is 13
     // const code = e.which;
+    console.log("conversation", conversation);
     let code = e.keyCode || e.which;
-    if(!val) return;
+    if (!val) return;
     //here we will check if the key that has been pressed is enter or not
 
     if (code === 13) {
       let message = {};
 
       if (!file) {
-
         message = {
           senderId: Details.email,
           receiverId: chatOfPersonOnWhichUHaveClicked.email,
           conversationId: conversation._id,
-          type: 'text',
+          type: "text",
           text: val,
-        }
-      }
-      else {
+        };
+      } else {
         message = {
           senderId: Details.email,
           receiverId: chatOfPersonOnWhichUHaveClicked.email,
           conversationId: conversation._id,
-          type: 'file',
+          type: "file",
           text: image,
-        }
+        };
       }
 
-      socket.current.emit('sendMessage', message);
+      socket.current.emit("sendMessage", message);
       await sendMessage(message);
-      setvalue('');
-      setimage('');
-      setFile('');
-      setmsgflag(prev => !prev)// toggling the state
+      setvalue("");
+      setimage("");
+      setFile("");
+      // setconversation((prevConversation) => ({
+      //   ...prevConversation,
+      //   messages: [...prevConversation.messages, message],
+      // }));
+      setmsgflag((prev) => !prev); // toggling the state
     }
-
-  }
+  };
   return (
     <Box>
       <Animated
-        animationIn='slideInDown'
+        animationIn="slideInDown"
         animationInDuration={400}
         // animationOut='flipInY'
-        isVisible={true}>
+        isVisible={true}
+      >
         <ChatHeader person={chatOfPersonOnWhichUHaveClicked} />
       </Animated>
-      
-      <MessageSection  value={value} setmessageToDisplay={setmessageToDisplay} messageToDisplay={messageToDisplay} msgflag={msgflag} setmsgflag={setmsgflag} conversation={conversation} person={chatOfPersonOnWhichUHaveClicked} />
+
+      <MessageSection
+        value={value}
+        setmessageToDisplay={setmessageToDisplay}
+        messageToDisplay={messageToDisplay}
+        msgflag={msgflag}
+        setmsgflag={setmsgflag}
+        conversation={conversation}
+        person={chatOfPersonOnWhichUHaveClicked}
+      />
       <Animated
-        animationIn='slideInUp'
+        animationIn="slideInUp"
         animationInDuration={400}
         // animationOut='flipInY'
-        isVisible={true}>
-
-
-        <ChatFooter setimage={setimage} setFile={setFile} file={file} setvalue={setvalue} value={value} conversation={conversation} sendChat={sendChat} />
+        isVisible={true}
+      >
+        <ChatFooter
+          setimage={setimage}
+          setFile={setFile}
+          file={file}
+          setvalue={setvalue}
+          value={value}
+          conversation={conversation}
+          sendChat={sendChat}
+        />
       </Animated>
     </Box>
-  )
-}
+  );
+};
 
-export default ChatBox
+export default ChatBox;
