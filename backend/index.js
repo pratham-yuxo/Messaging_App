@@ -114,8 +114,14 @@ import router from "./routes/forUser.js";
 
 const app = express();
 const server = http.createServer(app); // Create an HTTP server using Express app
-const io = new SocketIOServer(server); // Attach Socket.IO to the HTTP server
-
+// const io = new SocketIOServer(server); // Attach Socket.IO to the HTTP server
+const io = new SocketIOServer(server, {
+  cors: {
+    origin: "http://localhost:3000", // Allow requests from this origin
+    methods: ["GET", "POST"], // Allow these methods
+    credentials: true, // Allow credentials
+  },
+});
 connect(); // connecting MongoDB
 const port = 5000;
 
