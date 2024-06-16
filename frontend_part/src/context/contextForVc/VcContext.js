@@ -46,6 +46,7 @@ const ContextProvider = ({ children }) => {
         setMe(socketId);
       });
       //   socket.on('startVc');
+      console.log()
       socket.current.on('callUser', ({ from, name: callerName, signal }) => {
         console.log({from},"call user in frontend")
         setCall({ isReceivingCall: true, from, name: callerName, signal });
@@ -55,11 +56,11 @@ const ContextProvider = ({ children }) => {
     }, [videoCall,socket.current]);
 
 //    answering a call using peer
-useEffect(() => {
+// useEffect(() => {
   
 
 
-}, [])
+// }, [])
 
 const answerCall = () => {
 //  !videoCall && setVideoCall(true);
