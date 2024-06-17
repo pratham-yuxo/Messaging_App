@@ -8,17 +8,12 @@ import CallEndIcon from '@mui/icons-material/CallEnd';
 import { green,red } from '@mui/material/colors';
 
 const Notifications = () => {
-  const { answerCall, call,setStream, callAccepted, myVideo, setcallEnded } = useContext(SocketContext);
-  const {setVideoCall}=useContext(AccountContext);
-  useEffect(() => {
-    
-    
-    // answerCall();
-  
-}, [])
+  const {idUser,socket, answerCall, call,setStream, callAccepted, myVideo, setcallEnded } = useContext(SocketContext);
+  const {setVideoCall,videoCall}=useContext(AccountContext);
+
 const accept=()=>{
   
-  setVideoCall(true);
+  // setVideoCall(true);
   // setTimeout(() => {
       answerCall();
       // }, 2000);
@@ -36,7 +31,7 @@ const reject=()=>{
           display: 'flex', 
           flexDirection: 'column',
           position:'absolute',
-          top: '20px',
+          top: '40px',
           zIndex:'2',
           right:'20px',
           borderRadius:'10px',
@@ -45,14 +40,22 @@ const reject=()=>{
           background:"white"
           // borderWidth:"1px solid"
           }}>
+            <div style={{
+              display:"flex",
+              alignItems:"center",
+              justifyContent:"center",
+              gap:"8px"
+            }}>
+
           <h2 style={{
             fontSize:"20px",
             fontWeight:"400",
             textAlign:"center"
-          }}>{call.name || "pratham"}</h2>
+          }}>{call.name || "Pratham"}</h2>
+         {videoCall=="" && <CallIcon  sx={{ color: green[500] }}/>}
+          </div>
 
-
-            <div style={{
+           {videoCall!=""  && <div style={{
               display: 'flex', 
               // flexDirection: 'column',
               justifyContent:"center",
@@ -94,7 +97,12 @@ const reject=()=>{
             }}>Reject</div>
             </div>
           </IconButton>
-          </div>
+          </div>}
+          {videoCall=="" && <h2 style={{
+            fontSize:"15px",
+            fontWeight:"400",
+            textAlign:"center"
+          }}>click on video tab to join</h2>}
 
         </div>
       

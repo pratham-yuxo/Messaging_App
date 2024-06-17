@@ -144,6 +144,7 @@ const getUser = (userId) => {
   return users.find((user) => user.email === userId);
 };
 
+
 const removeUser = (socketId) => {
   users = users.filter((user) => user.socketId !== socketId);
 };
@@ -159,6 +160,17 @@ io.on("connection", (socket) => {
   socket.on("sendMessage", (data) => {
     const user = getUser(data.receiverId);
     user && io.to(user.socketId).emit("getMessage", data);
+  });
+ 
+   // Listen for an event to get an email by socket ID
+  socket.on('getEmail', (socketId, callback) => {
+    const user = users.find((user) => user.socketId === socketId);
+    console.log("get mail",user)
+    if (user) {
+      callback(user.email);
+    } else {
+      callback(null);
+    }
   });
 
   socket.on("disconnect", () => {

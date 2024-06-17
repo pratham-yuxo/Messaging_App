@@ -4,7 +4,7 @@ import AccountContext from '../accountContext';
 const SocketContext = createContext();
 
 const ContextProvider = ({ children }) => {
-    const {videoCall,setVideoCall, socket,chatOfPersonOnWhichUHaveClicked} = useContext(AccountContext);
+    const {videoCall,setVideoCall, socket,chatOfPersonOnWhichUHaveClicked,Details} = useContext(AccountContext);
   const [callAccepted, setCallAccepted] = useState(false);  // call accepted or not
   const [callEnded, setCallEnded] = useState(false);          // is call ended or not
   const [stream, setStream] = useState();
@@ -25,18 +25,6 @@ const ContextProvider = ({ children }) => {
   
     }
   useEffect(() => { 
-
-      // console.log("setting my video")
-      // navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-      // .then((currentStream) => {
-      //   setStream(currentStream);
-        
-      //   // setting the video of ours on screen
-      //   if(myVideo.current){
-          
-      //     myVideo.current.srcObject = currentStream;
-      //   }
-      // });
       
 
       if(socket.current){
@@ -102,7 +90,7 @@ const answerCall = () => {
     const peer = new Peer({ initiator: true, trickle: false, stream });
     peer.on('signal', (data) => {
       console.log(peer);
-      socket.current.emit('callUser', { userToCall: idUser, signalData: data, from: me, name });
+      socket.current.emit('callUser', { userToCall: idUser, signalData: data, from: me, name:Details.name });
     });
 console.log("stream is next")
     peer.on('stream', (currentStream) => {
