@@ -923,7 +923,10 @@ nav ul li img:hover{
   justify-content: center;
   position: absolute;
   bottom: 48px;
-  right: calc(44% - 120px);
+  left:50%;
+}
+.contarols svg{
+  font-size: 35px;
 }
 .contarols img{
   width: 40px;

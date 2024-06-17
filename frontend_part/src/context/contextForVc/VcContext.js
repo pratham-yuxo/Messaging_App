@@ -20,7 +20,7 @@ const ContextProvider = ({ children }) => {
     socket.current.on('receiverSocketId', (id) => {
       console.log("id from fronend",id);
       setIdUser(id);
-  
+
     });
   
     }
@@ -46,7 +46,7 @@ const ContextProvider = ({ children }) => {
         setMe(socketId);
       });
       //   socket.on('startVc');
-      console.log()
+      // console.log()
       socket.current.on('callUser', ({ from, name: callerName, signal }) => {
         console.log({from},"call user in frontend")
         setCall({ isReceivingCall: true, from, name: callerName, signal });
@@ -63,6 +63,7 @@ const ContextProvider = ({ children }) => {
 // }, [])
 
 const answerCall = () => {
+  console.log("inside answer call")
 //  !videoCall && setVideoCall(true);
   setCallAccepted(true);
 
@@ -84,7 +85,7 @@ const answerCall = () => {
     });
     
     peer.signal(call.signal);
-    
+    console.log("call answered",call)
     connectionRef.current = peer;
 
   };
@@ -97,13 +98,13 @@ const answerCall = () => {
     //  const id=getSocketId(chatOfPersonOnWhichUHaveClicked.email);
     //  console.log("see now",id)
     
-    console.log("calling function call user",chatOfPersonOnWhichUHaveClicked.email)
+    // console.log("calling function call user",chatOfPersonOnWhichUHaveClicked.email)
     const peer = new Peer({ initiator: true, trickle: false, stream });
     peer.on('signal', (data) => {
-      console.log(peer);
+      // console.log(peer);
       socket.current.emit('callUser', { userToCall: idUser, signalData: data, from: me, name });
     });
-console.log("stream is next")
+// console.log("stream is next")
     peer.on('stream', (currentStream) => {
       console.log(userVideo.current)
       userVideo.current.srcObject = currentStream;
@@ -122,7 +123,7 @@ console.log("stream is next")
     setCallEnded(true);
 
     connectionRef.current.destroy();
-
+    setVideoCall(false);
     window.location.reload();
   };
 
