@@ -49,7 +49,7 @@ const LeftDrawer = (props) => {
           <div  style={{
             "paddingRight":"20px",
             "paddingLeft":"23px",
-            "backgroundImage": "linear-gradient(#a00abb,#6621a4)",  
+            "backgroundImage": "linear-gradient(rgb(0 35 255), rgb(117 126 231))",  
             "height":"123px",
             "display":"flex",
             "gap":"25px",

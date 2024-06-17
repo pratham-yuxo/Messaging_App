@@ -104,13 +104,14 @@ const answerCall = () => {
       // console.log(peer);
       socket.current.emit('callUser', { userToCall: idUser, signalData: data, from: me, name });
     });
-// console.log("stream is next")
+console.log("stream is next")
     peer.on('stream', (currentStream) => {
       console.log(userVideo.current)
       userVideo.current.srcObject = currentStream;
     });
 
     socket.current.on('callAccepted', (signal) => {
+      console.log("set call accepted")
       setCallAccepted(true);
 
       peer.signal(signal);

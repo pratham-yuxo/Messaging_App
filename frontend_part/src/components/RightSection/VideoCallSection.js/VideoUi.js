@@ -39,14 +39,14 @@ useEffect(() => {
          <div className="header">
             <nav>
                 <img src={newLogo} className="logo"/>
-                <ul>
+                {/* <ul>
                     <li><img alt='img' src="https://i.postimg.cc/L8zxQBhv/live.png" className="activeCall"/></li>
                     <li><img alt='img' src="https://i.postimg.cc/JnggC78Q/video.png"/></li>
                     <li><img alt='img' src="https://i.postimg.cc/vmb3JgVy/message.png"/></li>
                     <li><img alt='img' src="https://i.postimg.cc/qR7Q7PwZ/notification.png"/></li>
                     <li><img alt='img' src="https://i.postimg.cc/k4DZH604/users.png"/></li>
                     <li><img alt='img' src="https://i.postimg.cc/v84Fqkyz/setting.png"/></li>
-                </ul>
+                </ul> */}
             </nav>
             <div className="container">
                 <div className="top-icons">
@@ -73,7 +73,7 @@ useEffect(() => {
 
             {/* our won video */}
 {stream &&      <BoxUser>
-            <video playsInline muted ref={myVideo} autoPlay  />
+            <video playsInline muted ref={userVideo} autoPlay  />
             </BoxUser>}
         </div>
     
