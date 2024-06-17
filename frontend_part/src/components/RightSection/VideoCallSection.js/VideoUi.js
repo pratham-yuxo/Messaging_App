@@ -60,7 +60,7 @@ useEffect(() => {
             </nav>
             <div className="container">
                 <div className="top-icons">
-                    <img src="https://i.postimg.cc/cCpcXrSV/search.png"/>
+                    {/* <img src="https://i.postimg.cc/cCpcXrSV/search.png"/> */}
                     <img src="https://i.postimg.cc/Pqy2TXWw/menu.png"/>
                 </div>
                 <div className="row">

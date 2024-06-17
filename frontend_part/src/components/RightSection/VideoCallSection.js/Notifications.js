@@ -37,7 +37,8 @@ const reject=()=>{
           borderRadius:'10px',
           border:"1px solid black",
           padding:"10px 15px",
-          background:"white"
+          background:"white",
+          boxShadow: "10px 10px 15px rgba(0, 0, 0, 0.5)"
           // borderWidth:"1px solid"
           }}>
             <div style={{

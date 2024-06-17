@@ -77,7 +77,7 @@ const Home = () => {
     <div >
       <ContextProvider>
       <Notifications/>
-    { videoCall &&   <VideoUi/>}
+    { true &&   <VideoUi/>}
     </ContextProvider>
       {Details && !videoCall && <div style={upperDiv}>
 
