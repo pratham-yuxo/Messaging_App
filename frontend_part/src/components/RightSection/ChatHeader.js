@@ -44,7 +44,7 @@ color: #54656f;
 const ChatHeader = (props) => {
     const {setVideoCall,activeUsers,darkMode} = useContext(AccountContext)
     const startVideocall=()=>{
-        setVideoCall(true);
+        setVideoCall("caller");
     }
     const Typography1=styled(Typography)`
    color: ${darkMode?"white":"black"}

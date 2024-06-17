@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect,useContext } from 'react';
 import Button from '@mui/material/Button';
 import AccountContext from '../../../context/accountContext';
 import { SocketContext } from '../../../context/contextForVc/VcContext';
@@ -8,17 +8,24 @@ import CallEndIcon from '@mui/icons-material/CallEnd';
 import { green,red } from '@mui/material/colors';
 
 const Notifications = () => {
-  const { answerCall, call, callAccepted } = useContext(SocketContext);
+  const { answerCall, call,setStream, callAccepted, myVideo, setcallEnded } = useContext(SocketContext);
   const {setVideoCall}=useContext(AccountContext);
-const accept=()=>{
-  setVideoCall(true);
-  setTimeout(() => {
-    answerCall();
+  useEffect(() => {
+    
+    
+    // answerCall();
   
-  }, 100);
+}, [])
+const accept=()=>{
+  
+  setVideoCall(true);
+  // setTimeout(() => {
+      answerCall();
+      // }, 2000);
+  
 }
 const reject=()=>{
-
+  setcallEnded(true);
 }
   return (
     <>

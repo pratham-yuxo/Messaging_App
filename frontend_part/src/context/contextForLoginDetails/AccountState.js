@@ -14,7 +14,7 @@ const AccountState = (props) => {
   // to store the list of active users
   const [activeUsers, setactiveUsers] = useState([]);
   const [darkMode, setdarkMode] = useState(false);
-  const [videoCall, setVideoCall] = useState(false);
+  const [videoCall, setVideoCall] = useState("");
   const socket = useRef();
   useEffect(() => {
     socket.current = io("ws://localhost:5000"); //address of backend where server of socket is running

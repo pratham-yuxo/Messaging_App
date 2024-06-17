@@ -24,8 +24,8 @@ const ContextProvider = ({ children }) => {
     });
   
     }
-  useEffect(() => {
-  
+  useEffect(() => { 
+
       // console.log("setting my video")
       // navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       // .then((currentStream) => {
@@ -38,8 +38,8 @@ const ContextProvider = ({ children }) => {
       //   }
       // });
       
-    
-    if(socket.current){
+
+      if(socket.current){
 
       socket.current.emit('getSocketId', (socketId) => {
         console.log(`Received socket ID: ${socketId}`);
@@ -98,15 +98,15 @@ const answerCall = () => {
     //  const id=getSocketId(chatOfPersonOnWhichUHaveClicked.email);
     //  console.log("see now",id)
     
-    // console.log("calling function call user",chatOfPersonOnWhichUHaveClicked.email)
+    console.log("calling function call user",chatOfPersonOnWhichUHaveClicked.email)
     const peer = new Peer({ initiator: true, trickle: false, stream });
     peer.on('signal', (data) => {
-      // console.log(peer);
+      console.log(peer);
       socket.current.emit('callUser', { userToCall: idUser, signalData: data, from: me, name });
     });
 console.log("stream is next")
     peer.on('stream', (currentStream) => {
-      console.log(userVideo.current)
+      console.log(userVideo.current,"video set")
       userVideo.current.srcObject = currentStream;
     });
 
@@ -151,3 +151,4 @@ console.log("stream is next")
 };
 
 export { ContextProvider, SocketContext };
+

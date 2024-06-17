@@ -28,10 +28,20 @@ useEffect(() => {
         myVideo.current.srcObject = currentStream;
       }
     });
-    
+    // answerCall();
   
 }, [])
-
+// useEffect(() => {
+//     if (myVideo.current && stream) {
+//       myVideo.current.srcObject = stream;
+//     }
+//   }, [myVideo, stream]);
+  
+//   useEffect(() => {
+//     if (userVideo.current && stream) {
+//       userVideo.current.srcObject = stream;
+//     }
+//   }, [userVideo, stream,callAccepted]);
   return (
    
 
@@ -73,7 +83,7 @@ useEffect(() => {
 
             {/* our won video */}
 {stream &&      <BoxUser>
-            <video playsInline muted ref={userVideo} autoPlay  />
+            <video playsInline muted ref={myVideo} autoPlay  />
             </BoxUser>}
         </div>
     
