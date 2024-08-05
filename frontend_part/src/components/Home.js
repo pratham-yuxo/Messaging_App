@@ -3,17 +3,11 @@ import ChatBox from "./RightSection/ChatBox"
 import LeftSideBar from "./LeftBar/chatListSection/LeftSideBar"
 import EmptyChat from './RightSection/EmptyChat'
 import AccountContext from '../context/accountContext'
-// import AddDialog from './AddFriendSection/AddDialog'
 import { useNavigate } from 'react-router-dom'
 import { fetchDetails } from '../allApis/forAdding'
 import VideoUi from './RightSection/VideoCallSection.js/VideoUi'
 import { ContextProvider } from '../context/contextForVc/VcContext'
 import Notifications from './RightSection/VideoCallSection.js/Notifications'
-// "maxWidth":"46%",
-// "minWidth":"344px",
-// "width":"436px",
-// "height":"100vh",
-// "background":"#fff"
 
 const Home = () => {
 
@@ -27,6 +21,9 @@ const Home = () => {
     "borderLeft": `1px solid ${darkMode ? "#000000" : "rgba(0,0,0,0.2)"} !important`,
     flex: '1'
   }
+
+
+  
   useEffect(() => {
    
 
@@ -77,7 +74,7 @@ const Home = () => {
     <div >
       <ContextProvider>
       <Notifications/>
-    { true &&   <VideoUi/>}
+    { videoCall &&   <VideoUi/>}
     </ContextProvider>
       {Details && !videoCall && <div style={upperDiv}>
 

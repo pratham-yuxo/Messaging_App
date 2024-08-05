@@ -103,7 +103,7 @@ export const uploadFile = async (data)=>{
   return response;
     } catch (error) {
      console.log("error in frontend upload file",error)   
-    }
+    } 
 }
 export const uploadAudio = async (data)=>{
     try {

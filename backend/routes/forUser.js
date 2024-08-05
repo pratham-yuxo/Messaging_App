@@ -27,7 +27,7 @@ router.get('/audiofile/:filename',getAudio);// grid fs stream for collecting fil
 
 router.post('/file/uploadAudio',uploadA.single("audio"),uploadaudio)
 
-// profile
+// profile 
 // edit name
 router.put('/edit/name/:id',authenticate,setData);
 // messsages

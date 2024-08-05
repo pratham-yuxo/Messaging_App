@@ -111,13 +111,16 @@ export const setData=async(req,res)=>{
         res.status(500).send("invalid user")
     }
     try {
-        const { name,imageUrl } = req.body;
+        const { name,imageUrl,bio } = req.body;
         const newData = {};
         if (name) {
             newData.name = name;
         }
         if (imageUrl) {
             newData.picture=imageUrl;
+        }
+        if(bio){
+            newData.bio=bio;
         }
 
 

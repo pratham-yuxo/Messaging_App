@@ -3,7 +3,7 @@ import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import { ReactMic } from 'react-mic';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
-import { uploadAudio, uploadFile } from '../../allApis/forAdding';
+// import { uploadAudio, uploadFile } from '../../allApis/forAdding';
 const Audio = (props) => {
   const style = { 'cursor': "pointer", "fontSize": "26px" };
   const [isRecording, setIsRecording] = useState(false);
