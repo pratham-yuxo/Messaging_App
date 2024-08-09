@@ -15,7 +15,7 @@
     <img src="images/newLogo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Connect it</h3>
+  <h3 align="center">Connection</h3>
 
   <p align="center">
     Connect it is a messaging application to connect people all over the world.
